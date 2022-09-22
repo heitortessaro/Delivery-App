@@ -9,10 +9,8 @@ const minpass = 6;
 const errovalidation = 404;
 
 function Login() {
+  const [erroMessage, setErrorMessage] = useState('');
   const [btnIsdisable, setBttnIsDisabled] = useState(true);
-  const [failEmail, setfailemail] = useState(false);
-  const [invalidUser, setinValidUser] = useState(false);
-  const [failconection, setfailconection] = useState(false);
   const [formState, setFormState] = useState({
     email: '',
     password: '',
@@ -31,12 +29,12 @@ function Login() {
       const validatePassword = password.length >= minpass;
       if (validateEmail && validatePassword) {
         setBttnIsDisabled(false);
-        setfailemail(false);
+        setErrorMessage('');
       } else if (email.length === 0) {
-        setfailemail(false);
+        setErrorMessage('');
         setBttnIsDisabled(true);
       } else {
-        setfailemail(true);
+        setErrorMessage('digite um email valido');
         setBttnIsDisabled(true);
       }
     };
@@ -46,11 +44,11 @@ function Login() {
   const handleButtonLogin = async () => {
     const result = await login({ email, password });
     if (!result) {
-      setfailconection(true);
+      setErrorMessage('falha na comunicacao');
       return null;
     }
     if (result.status === errovalidation) {
-      setinValidUser(false);
+      setErrorMessage('usuario Invalido');
       return null;
     }
     localStorage.setItem(keyLocalStorage, JSON.stringify(result));
@@ -107,35 +105,9 @@ function Login() {
           Ainda nao tenho Conta
         </button>
       </form>
-      {
-        failEmail
-          ? (
-            <div>
-              <p data-testid="common_login__element-invalid-email">
-                insira um email valido
-              </p>
-            </div>
-          )
-          : null
-      }
-      {
-        invalidUser
-          ? (
-            <div>
-              <p dtata-testid="common_login__element-invalid-email">
-                Usuario ou senha invalido
-              </p>
-            </div>
-          )
-          : null
-      }
-      {
-        failconection ? (
-          <div>
-            <p> falha na comunicacao</p>
-          </div>
-        ) : null
-      }
+      <p data-testid="common_login__element-invalid-email">
+        { erroMessage }
+      </p>
     </section>
   );
 }
