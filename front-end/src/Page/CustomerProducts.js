@@ -1,9 +1,10 @@
 import React from 'react';
+import NavClient from '../components/NavClient';
 
 export default function CustomerProducts() {
   return (
     <div>
-      register
+      <NavClient selected="produtos" customer="Nome usuário" />
     </div>
   );
 }
