@@ -53,5 +53,8 @@
       "__TESTDESC__": true,
       "__TESTFILE__": true
     }
+  },
+  "dependencies": {
+    "email-validator": "^2.0.4"
   }
 }
