@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import * as EmailValidator from 'email-validator';
-import { Redirect } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Logo from '../images/logo.jpg';
 import { login } from '../services/loginServices';
 import './styles/login.css';
@@ -17,6 +17,7 @@ function Login() {
     email: '',
     password: '',
   });
+  const navigate = useNavigate();
 
   const { email, password } = formState;
 
@@ -54,9 +55,9 @@ function Login() {
     }
     localStorage.setItem(keyLocalStorage, JSON.stringify(result));
 
-    if (result.role === 'customer') Redirect('/customer/products');
-    if (result.role === 'administrator') Redirect('/admin/manage');
-    if (result.role === 'seller') Redirect('/seller/orders');
+    if (result.role === 'customer') navigate('/customer/products');
+    if (result.role === 'administrator') navigate('/admin/manage');
+    if (result.role === 'seller') navigate('/seller/orders');
   };
 
   return (
@@ -101,7 +102,7 @@ function Login() {
           className="button_Register"
           type="button"
           data-testid="common_login__button-register"
-          onClick={ () => Redirect('/register') }
+          onClick={ () => navigate('/register') }
         >
           Ainda nao tenho Conta
         </button>

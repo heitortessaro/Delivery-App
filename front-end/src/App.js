@@ -1,15 +1,17 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Routes as Switch, Navigate } from 'react-router-dom';
 import Login from './Page/Login';
+import Register from './Page/Register';
 
 function App() {
   return (
     <BrowserRouter>
       <div className="App">
         <Switch>
-          <Redirect exact from="/" to="/login" />
-          <Route exact to="/login" component={ Login } />
+          <Route exact path="/" element={ <Navigate to="/login" /> } />
+          <Route exact path="/login" element={ <Login /> } />
+          <Route exact path="/register" element={ <Register /> } />
         </Switch>
       </div>
     </BrowserRouter>
