@@ -1,13 +1,12 @@
 import axios from 'axios';
 
-const instance = axios.create({
-  URL: 'http://localhost:3001',
-});
+const URL = 'http://localhost:3001/login';
 
 export const login = async ({ email, password }) => {
   try {
-    const { data } = await instance.post('/login', { email, password });
-    return data;
+    const result = await axios.post(URL, { email, password });
+    console.log(result);
+    return result;
   } catch (error) {
     return null;
   }

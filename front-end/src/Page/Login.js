@@ -28,7 +28,7 @@ function Login() {
   useEffect(() => {
     const verifyButton = () => {
       const validateEmail = EmailValidator.validate(email);
-      const validatePassword = password.length > minpass;
+      const validatePassword = password.length >= minpass;
       if (validateEmail && validatePassword) {
         setBttnIsDisabled(false);
         setfailemail(false);
