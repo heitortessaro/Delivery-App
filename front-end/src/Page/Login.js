@@ -33,7 +33,7 @@ function Login() {
         setfailemail(false);
       } else if (email.length === 0) {
         setfailemail(false);
-        setBttnIsDisabled(false);
+        setBttnIsDisabled(true);
       } else {
         setfailemail(true);
         setBttnIsDisabled(true);
@@ -46,9 +46,11 @@ function Login() {
     const result = await login({ email, password });
     if (!result) {
       setfailconection(true);
+      return null;
     }
     if (result.status === errovalidation) {
       setinValidUser(false);
+      return null;
     }
     localStorage.setItem(keyLocalStorage, JSON.stringify(result));
 
