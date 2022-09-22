@@ -3,7 +3,7 @@ import * as EmailValidator from 'email-validator';
 import { createUser } from '../services/loginServices';
 
 export default function Register() {
-  const minpass = 6;
+  const minpass = 5;
   const minName = 12;
   const errovalidation = 409;
   const [btnIsdisable, setBttnIsDisabled] = useState(true);
@@ -23,7 +23,7 @@ export default function Register() {
     const verifyButton = () => {
       const validateEmail = EmailValidator.validate(email);
       const InvalidatePassword = (password.length <= minpass && password !== 0);
-      const InvalidName = (name.length <= minName && name.length !== 0);
+      const InvalidName = (name.length < minName && name.length !== 0);
 
       if (InvalidatePassword) setBttnIsDisabled(true);
       if (validateEmail && !InvalidatePassword && !InvalidName) {
