@@ -1,0 +1,73 @@
+.box_principal {
+  align-items: center;
+  color: red;
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+}
+
+.box_logo {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.box_logo img {
+  border-radius: 50px;
+}
+
+.box_logo h2 {
+  color: white;
+  font-size: 30px;
+}
+
+.forms_login {
+  align-items: center;
+  background-color: rgb(244, 251, 244);
+  border: 2px solid black;
+  border-radius: 8px;
+  box-shadow: 0 2px 9px 3px rgb(36, 107, 18);
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  padding-bottom: 50px;
+}
+
+.label_login {
+  align-items: center;
+  color: rgb(83, 59, 59);
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  font-weight: 900;
+  padding: 15px;
+}
+
+input {
+  border-radius: 10px;
+  box-shadow: 0 0 5px 2px gray;
+  height: 25px;
+  margin-top: 10px;
+  padding: 5px;
+  width: 250px;
+}
+
+button {
+  border-radius: 5px;
+  height: 40px;
+  margin: 5px;
+}
+
+.button_login {
+  background-color: rgb(141, 237, 45);
+  color: white;
+  font-size: 20px;
+  width: 260px;
+}
+
+.button_Register {
+  border: 3px solid green;
+  color: darkgreen;
+  font-size: 20px;
+  width: 260px;
+}

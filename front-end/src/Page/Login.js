@@ -3,6 +3,7 @@ import * as EmailValidator from 'email-validator';
 import { Redirect } from 'react-router-dom';
 import Logo from '../images/logo.jpg';
 import { login } from '../services/loginServices';
+import './styles/login.css';
 
 const minpass = 6;
 const errovalidation = 404;
@@ -57,52 +58,52 @@ function Login() {
   };
 
   return (
-    <section>
-      <div>
-        <div>
-          <img src={ Logo } alt="logo" />
-          <h2>app de delivery</h2>
-        </div>
-        <form>
-          <label htmlFor="email-input">
-            Login
-            <input
-              id="email-input"
-              type="text"
-              name="email"
-              data-testid="common_login__input-email"
-              value={ email }
-              onChange={ handleInput }
-            />
-          </label>
-          <label htmlFor="password-input">
-            Senha
-            <input
-              id="password-input"
-              type="password"
-              name="password"
-              data-testid="common_login__input-password"
-              value={ password }
-              onChange={ handleInput }
-            />
-          </label>
-          <button
-            type="button"
-            data-testid="common_login__button-login"
-            disabled={ btnIsdisable }
-            onClick={ handleButtonLogin }
-          >
-            LOGIN
-          </button>
-          <button
-            type="button"
-            data-testid="common_login__button-register"
-            onClick={ () => Redirect('/register') }
-          >
-            Ainda nao tenho Conta
-          </button>
-        </form>
+    <section className="box_principal">
+      <div className="box_logo">
+        <img src={ Logo } alt="logo" />
+        <h2>app de delivery</h2>
       </div>
+      <form className="forms_login">
+        <label htmlFor="email-input" className="label_login">
+          Login
+          <input
+            id="email-input"
+            type="text"
+            name="email"
+            data-testid="common_login__input-email"
+            value={ email }
+            onChange={ handleInput }
+          />
+        </label>
+        <label htmlFor="password-input" className="label_login">
+          Senha
+          <input
+            id="password-input"
+            type="password"
+            name="password"
+            data-testid="common_login__input-password"
+            value={ password }
+            onChange={ handleInput }
+          />
+        </label>
+        <button
+          className="button_login"
+          type="button"
+          data-testid="common_login__button-login"
+          disabled={ btnIsdisable }
+          onClick={ handleButtonLogin }
+        >
+          LOGIN
+        </button>
+        <button
+          className="button_Register"
+          type="button"
+          data-testid="common_login__button-register"
+          onClick={ () => Redirect('/register') }
+        >
+          Ainda nao tenho Conta
+        </button>
+      </form>
       {
         failEmail
           ? (
