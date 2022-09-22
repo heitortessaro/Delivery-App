@@ -11,13 +11,13 @@ class UserService {
   async login(email, password) {
     const hashedPassword = md5(password);
 
-    const user = await this.userModel.findOne({ where: { email, password: hashedPassword } });
+    const usuario = await this.userModel.findOne({ where: { email, password: hashedPassword } });
 
-    if (!user) throw new CustomError(404, 'User not found');
+    if (!usuario) throw new CustomError(404, 'User not found');
 
     const userToken = token.generate({ email, hashedPassword });
 
-    const { name, role, id } = user;
+    const { name, role, id } = usuario;
 
     return {
       id,
