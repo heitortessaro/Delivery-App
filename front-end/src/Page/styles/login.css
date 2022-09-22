@@ -71,3 +71,10 @@ button {
   font-size: 20px;
   width: 260px;
 }
+
+.button_login:disabled {
+  background-color: rgb(166, 176, 156);
+  color: white;
+  font-size: 20px;
+  width: 260px;
+}
