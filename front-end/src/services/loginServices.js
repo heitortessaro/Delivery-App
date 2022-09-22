@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  URL: 'http://localhost:3001/login',
+  URL: 'http://localhost:3001',
 });
 
 export const login = async ({ email, password }) => {
