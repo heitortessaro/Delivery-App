@@ -1,5 +1,4 @@
 const { product } = require('../database/models');
-const { CustomError } = require('../helpers/customError');
 
 class ProductsService {
     constructor(productsModel = product) {
