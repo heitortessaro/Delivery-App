@@ -10,10 +10,9 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.use(productsRouter);
+app.use(productsRouter, userRouter);
 
 app.get('/coffee', (_req, res) => res.status(418).end());
-app.use('/users', userRouter);
 
 app.use(errorHandler.handle);
 
