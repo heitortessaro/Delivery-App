@@ -10,38 +10,69 @@
 }
 
 .navbar_bg {
-  position: absolute;
-  height: 105px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 75px;
   left: 0%;
   right: 0%;
   top: 0.01px;
   background: var(--main-color);
 };
 
-/* bg */
-.bts-products {
-  width: 367px;
-  height: 105px;
-  font-size: 36px;
-  text-align: center;
-}
-
-.customer {
-  background-color: var(--user);
-  color: white;
-}
+.customer {}
 
 .logout {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  min-width: 300px;
+  height: 75px;
+  font-size: 26px;
+  text-align: center;
   background-color: var(--logout);
   color: white;
 }
 
+.customer {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  min-width: 300px;
+  height: 75px;
+  font-size: 26px;
+  text-align: center;
+  background-color: var(--user);
+  color: white;
+}
+
 .selected {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  min-width: 300px;
+  height: 75px;
+  font-size: 26px;
+  text-align: center;
   background-color: var(--selected);
   color: black;
 }
 
-/* Secundário */
-background: var(sected);
+.no_selected {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  min-width: 300px;
+  height: 75px;
+  font-size: 26px;
+  text-align: center;
+  background-color: var(--main-color);
+  color: white;
+}
 
-
+.no_selected:hover, .selected:hover, .logout:hover, .customer:hover {
+  height: 71px;
+  min-width: 296px;
+  border: 2px solid white;
+  cursor: pointer;
+}
