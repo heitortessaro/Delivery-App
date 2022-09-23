@@ -13,6 +13,7 @@ app.use(cors());
 app.use(productsRouter, userRouter);
 
 app.get('/coffee', (_req, res) => res.status(418).end());
+
 // app.use('/users', userRouter);
 
 app.use(errorHandler.handle);
