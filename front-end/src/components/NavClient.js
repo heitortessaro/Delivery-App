@@ -1,7 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './styles/navClient.css';
 
 export default function CustomerProducts({ selected, customer, showProducts }) {
+  const navigate = useNavigate();
   return (
     <nav className="navbar_bg">
       <div>
@@ -10,6 +12,7 @@ export default function CustomerProducts({ selected, customer, showProducts }) {
             className={ ` ${selected === 'produtos' ? 'selected' : 'no_selected'}` }
             type="button"
             data-testid="customer_products__element-navbar-link-products"
+            onClick={ () => navigate('/customer/products') }
           >
             PRODUTOS
           </button>
@@ -18,6 +21,7 @@ export default function CustomerProducts({ selected, customer, showProducts }) {
           className={ ` ${selected === 'pedidos' ? 'selected' : 'no_selected'}` }
           data-testid="customer_products__element-navbar-link-orders"
           type="button"
+          onClick={ () => navigate('') }
         >
           MEUS PEDIDOS
         </button>
@@ -27,6 +31,7 @@ export default function CustomerProducts({ selected, customer, showProducts }) {
           className="customer"
           data-testid="customer_products__element-navbar-user-full-name"
           type="button"
+          onClick={ () => navigate('') }
         >
           {customer}
         </button>
@@ -34,6 +39,7 @@ export default function CustomerProducts({ selected, customer, showProducts }) {
           className="logout"
           data-testid="customer_products__element-navbar-link-logout"
           type="button"
+          onClick={ () => navigate('') }
         >
           Sair
         </button>
