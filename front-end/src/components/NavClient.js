@@ -1,19 +1,21 @@
 import React from 'react';
 import './styles/navClient.css';
 
-export default function CustomerProducts(selected, customer) {
+export default function CustomerProducts({ selected, customer, showProducts }) {
   return (
-    <nav className="navbar">
+    <nav className="navbar_bg">
       <div>
+        {showProducts && (
+          <button
+            className={ ` ${selected === 'produtos' ? 'selected' : 'no_selected'}` }
+            type="button"
+            data-testid="customer_products__element-navbar-link-products"
+          >
+            PRODUTOS
+          </button>
+        )}
         <button
-          className={ `bts-products ${selected === produtos ? 'selected' : ''}` }
-          type="button"
-          data-testid="customer_products__element-navbar-link-products"
-        >
-          PRODUTOS
-        </button>
-        <button
-          className={ `bts-products ${selected === pedidos ? 'selected' : ''}` }
+          className={ ` ${selected === 'pedidos' ? 'selected' : 'no_selected'}` }
           data-testid="customer_products__element-navbar-link-orders"
           type="button"
         >
@@ -22,14 +24,14 @@ export default function CustomerProducts(selected, customer) {
       </div>
       <div>
         <button
-          className="bts-products customer"
+          className="customer"
           data-testid="customer_products__element-navbar-user-full-name"
           type="button"
         >
           {customer}
         </button>
         <button
-          className="bts-products logout"
+          className="logout"
           data-testid="customer_products__element-navbar-link-logout"
           type="button"
         >
