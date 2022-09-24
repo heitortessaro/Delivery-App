@@ -1,0 +1,19 @@
+.table_products {
+  align-items: baseline;
+  display: flex;
+}
+
+.descrp {
+  text-align: center;
+  width: 400px;
+}
+
+.quant {
+  text-align: center;
+  width: 70px;
+}
+
+.value {
+  text-align: center;
+  width: 100px;
+}

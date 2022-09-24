@@ -55,7 +55,7 @@ export default function Register() {
     }
     localStorage.setItem(keyLocalStorage, JSON.stringify(result));
 
-    if (result.role === 'customer') navigate('/customer/products');
+    if (result.data.role === 'customer') navigate('/customer/products');
   };
 
   return (
