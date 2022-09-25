@@ -12,6 +12,12 @@ class UserController {
 
     res.status(200).json(user);
   }
+
+  async addUser(req, res) {
+    const { name, email, password } = req.body;
+    const { newUser, message } = await this.userService.addUser(name, email, password);
+    res.status(201).json({ message, newUser });
+  }
 }
 
 module.exports = {
