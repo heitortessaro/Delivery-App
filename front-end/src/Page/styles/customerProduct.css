@@ -5,3 +5,10 @@
   height: 100%;
   width: 100%;
 }
+
+.card_shelf {
+  width: 100%;
+  min-width: ;
+  background-color: white;
+  padding: 20px;
+}
