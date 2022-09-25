@@ -7,6 +7,11 @@ class SalesService {
         this.saleProductModel = saleProductModel;
     }
 
+    async getSales() {
+        const sales = await this.salesModel.findAll();
+        return sales;
+    }
+
     async addSale(newSale) {
         const { products } = newSale;
         const saleObj = newSale;
