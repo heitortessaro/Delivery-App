@@ -1,4 +1,4 @@
-import axios from 'axios';
+const axios = require('axios');
 
 const URL = 'http://localhost:3001/products';
 
@@ -15,7 +15,7 @@ const addQuantityKey = (productArray) => {
   return productArray;
 };
 
-export const getProducts = async () => {
+const getProducts = async () => {
   try {
     const result = await axios.post(URL);
     const products = addQuantityKey(result);
@@ -25,4 +25,4 @@ export const getProducts = async () => {
   }
 };
 
-export default { getProducts, computeTotalCart };
+module.exports = { getProducts, computeTotalCart };
