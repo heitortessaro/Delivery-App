@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import NavClient from '../components/NavClient';
 import ProductCard from '../components/ProductCard';
+import TotalTag from '../components/TotalTag';
 import { getProducts, computeTotalCart } from '../services/productsServices';
 import './styles/customerProduct.css';
 
@@ -24,7 +25,7 @@ export default function CustomerProducts() {
 
   useEffect(() => {
     receiveProducts();
-  });
+  }, []);
 
   console.log(total);
   return (
@@ -45,6 +46,7 @@ export default function CustomerProducts() {
           ))
         )}
       </div>
+      <div className="tag_shelf"><TotalTag total={ total } /></div>
     </section>
   );
 }

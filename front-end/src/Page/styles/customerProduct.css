@@ -8,7 +8,12 @@
 
 .card_shelf {
   width: 100%;
-  min-width: ;
   background-color: white;
   padding: 20px;
+}
+
+.tag_shelf {
+  bottom: +30px;
+  position: fixed;
+  right: +30px;
 }
