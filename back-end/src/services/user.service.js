@@ -27,6 +27,16 @@ class UserService {
       token: userToken,
     };
   }
+  
+  async addUser(name, email, password) {
+    const hashedPassword = md5(password);
+    const registeredUser = await this.userModel
+      .findOne({ where: { email, password: hashedPassword } });
+    if (registeredUser) throw new CustomError(409, 'User already registered');
+    await this.userModel
+      .create({ name, email, password: hashedPassword, role: 'customer' });
+    return { message: 'Created' };
+  }
 }
 
 module.exports = {
