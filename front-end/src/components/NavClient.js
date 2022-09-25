@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import './styles/navClient.css';
 
 export default function CustomerProducts({ selected, customer, showProducts }) {
@@ -47,3 +48,9 @@ export default function CustomerProducts({ selected, customer, showProducts }) {
     </nav>
   );
 }
+
+CustomerProducts.propTypes = {
+  selected: PropTypes.string.isRequired,
+  customer: PropTypes.string.isRequired,
+  showProducts: PropTypes.bool.isRequired,
+};
