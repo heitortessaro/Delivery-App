@@ -2,14 +2,14 @@ import axios from 'axios';
 
 const URL = 'http://localhost:3001/products';
 
-export const login = async ({ email, password }) => {
+export const getProducts = async () => {
   try {
-    const result = await axios.post(URL, { email, password });
-    console.log(result);
+    const result = await axios.post(URL);
+    // console.log(result);
     return result;
   } catch (error) {
     return null;
   }
 };
 
-export default { login };
+export default { getProducts };
