@@ -2,7 +2,11 @@ import React from 'react';
 import './styles/productCard.css';
 import PropTypes from 'prop-types';
 
-export default function ProductCard({ name, value, image, quantity, id }) {
+export default function ProductCard(
+  { name, value, image, quantity, id, quantityHandler },
+) {
+  const plusOne = 1;
+  const minusOne = -1;
   return (
     <div className="product_card">
       <div className="product_price">
@@ -30,6 +34,7 @@ export default function ProductCard({ name, value, image, quantity, id }) {
             type="button"
             className="product-btn-left"
             data-testid={ `customer_products__button-card-rm-item-${id}` }
+            onClick={ () => quantityHandler(id, minusOne) }
           >
             -
           </button>
@@ -42,6 +47,7 @@ export default function ProductCard({ name, value, image, quantity, id }) {
             type="button"
             className="product-btn-rigth "
             data-testid={ `customer_products__button-card-add-item--${id}` }
+            onClick={ () => quantityHandler(id, plusOne) }
           >
             +
           </button>
@@ -57,4 +63,5 @@ ProductCard.propTypes = {
   image: PropTypes.string.isRequired,
   quantity: PropTypes.string.isRequired,
   id: PropTypes.string.isRequired,
+  quantityHandler: PropTypes.func.isRequired,
 };
