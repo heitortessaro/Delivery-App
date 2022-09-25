@@ -2,14 +2,27 @@ import axios from 'axios';
 
 const URL = 'http://localhost:3001/products';
 
+const computeTotalCart = (productArray) => {
+  const total = productArray
+    .reduce((acc, curr) => acc + (Number(curr.quantity) * Number(curr.value)), 0);
+  return total;
+};
+
+const addQuantityKey = (productArray) => {
+  productArray.forEach((e) => {
+    e.quantity = 0;
+  });
+  return productArray;
+};
+
 export const getProducts = async () => {
   try {
     const result = await axios.post(URL);
-    // console.log(result);
-    return result;
+    const products = addQuantityKey(result);
+    return products;
   } catch (error) {
-    return null;
+    return [];
   }
 };
 
-export default { getProducts };
+export default { getProducts, computeTotalCart };
