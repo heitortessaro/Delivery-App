@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocalStorage } from '@mantine/hooks';
 import NavClient from '../components/NavClient';
 import ProductCard from '../components/ProductCard';
 import TotalTag from '../components/TotalTag';
@@ -6,7 +7,7 @@ import { getProducts, computeTotalCart } from '../services/productsServices';
 import './styles/customerProduct.css';
 
 export default function CustomerProducts() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useLocalStorage({ key: 'products', defaultValue: [] });
   const [total, setTotal] = useState((0).toFixed(2));
 
   const receiveProducts = async () => {
