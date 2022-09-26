@@ -11,7 +11,7 @@ module.exports = {
       {
         name: 'Heineken 600ml',
         price: 7.50,
-        url_image: 'http://localhost:3001/images/brahma_600ml.jpg',
+        url_image: 'http://localhost:3001/images/heineken_600ml.jpg',
       },
       {
         name: 'Antarctica Pilsen 300ml',
