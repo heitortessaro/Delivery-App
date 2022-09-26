@@ -15,9 +15,12 @@ export default function CustomerProducts() {
     setProducts(receivedProducts);
   };
 
-  const changeQuantity = (id, addQtty) => {
+  const changeQuantity = (id, addQtty, operation) => {
     const index = products.findIndex((p) => p.id === id);
-    const newQtty = products[index].quantity + addQtty;
+    let newQtty;
+    console.log(`addqtty: ${addQtty},    operation: ${operation}`);
+    if (operation === 'sum') newQtty = products[index].quantity + addQtty;
+    if (operation === 'change' && addQtty >= 0) newQtty = addQtty;
     if (newQtty >= 0) {
       const newProducts = products;
       newProducts[index].quantity = newQtty;
