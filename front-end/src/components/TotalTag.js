@@ -20,5 +20,5 @@ export default function TotalTag(
 }
 
 TotalTag.propTypes = {
-  total: PropTypes.number.isRequired,
+  total: PropTypes.string.isRequired,
 };
