@@ -7,9 +7,14 @@
 }
 
 .card_shelf {
-  width: 100%;
+  margin: auto;
+  max-width: 1200px;
   background-color: white;
   padding: 20px;
+  display: flex;
+  gap: 60px;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .tag_shelf {
