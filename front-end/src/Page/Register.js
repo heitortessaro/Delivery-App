@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as EmailValidator from 'email-validator';
 import { createUser } from '../services/loginServices';
 
@@ -14,6 +15,7 @@ export default function Register() {
     password: '',
   });
   const { name, email, password } = formState;
+  const navigate = useNavigate();
 
   const handleInput = ({ target }) => {
     setFormState({ ...formState, [target.name]: target.value });
@@ -44,18 +46,18 @@ export default function Register() {
   }, [email, password, name]);
 
   const handleButtonLogin = async () => {
-    const result = await createUser({ email, password });
-    if (!result) {
-      setMessageerror('falha na comunicacao');
-      return null;
-    }
-    if (result.status === errovalidation) {
+    const { newUser, error } = await createUser({ name, email, password });
+    if (error && error.status === errovalidation) {
       setMessageerror('Usuario ja cadastrado');
       return null;
     }
-    localStorage.setItem(keyLocalStorage, JSON.stringify(result));
+    if (!newUser && !error) {
+      setMessageerror('falha na comunicacao');
+      return null;
+    }
+    localStorage.setItem('keyLocalStorage', JSON.stringify(newUser));
 
-    if (result.data.role === 'customer') navigate('/customer/products');
+    if (newUser.role === 'customer') navigate('/customer/products');
   };
 
   return (
