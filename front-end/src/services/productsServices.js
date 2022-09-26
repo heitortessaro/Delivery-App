@@ -4,7 +4,8 @@ const URL = 'http://localhost:3001/products';
 
 const computeTotalCart = (productArray) => {
   const total = productArray
-    .reduce((acc, curr) => acc + (Number(curr.quantity) * Number(curr.value)), 0);
+    .reduce((acc, curr) => acc + Number(curr.quantity) * Number(curr.price), 0)
+    .toFixed(2);
   return total;
 };
 
