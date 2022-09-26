@@ -5,6 +5,11 @@ import './styles/navClient.css';
 
 export default function CustomerProducts({ selected, customer, showProducts }) {
   const navigate = useNavigate();
+  const logoutFun = () => {
+    localStorage.clear();
+    navigate('/login');
+  };
+
   return (
     <nav className="navbar_bg">
       <div>
@@ -40,7 +45,7 @@ export default function CustomerProducts({ selected, customer, showProducts }) {
           className="logout"
           data-testid="customer_products__element-navbar-link-logout"
           type="button"
-          onClick={ () => navigate('') }
+          onClick={ () => logoutFun() }
         >
           Sair
         </button>
