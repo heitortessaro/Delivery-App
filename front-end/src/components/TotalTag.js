@@ -14,7 +14,7 @@ export default function TotalTag(
       className="total_tag"
       onClick={ () => navigate() }
     >
-      {`Ver Carrinho: R$ ${total}`}
+      {`Ver Carrinho: R$ ${total.toString().replace('.', ',')}`}
     </button>
   );
 }
