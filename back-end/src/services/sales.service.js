@@ -6,8 +6,20 @@ class SalesService {
         this.saleProductModel = saleProductModel;
     }
 
-    async getSales() {
-        const sales = await this.salesModel.findAll();
+    async getSales(id, role) {
+        let sales = {};
+        switch (role) {
+            case 'administrator':
+                sales = await this.salesModel.findAll();
+                break;
+            case 'customer':
+                sales = await this.salesModel.findAll({ where: { userId: id } });
+                break;
+            case 'seller':
+                sales = await this.salesModel.findAll({ where: { sellerId: id } });
+                break;
+            default: break;
+        }
         return sales;
     }
 

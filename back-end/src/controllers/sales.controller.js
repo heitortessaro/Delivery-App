@@ -5,8 +5,9 @@ class SalesController {
         this.salesService = salesService;
     }
 
-    async getSales(_req, res) {
-        const result = await this.salesService.getSales();
+    async getSales(req, res) {
+        const { id, role } = req.user;
+        const result = await this.salesService.getSales(id, role);
         return res.status(200).json(result);
     }
 

@@ -1,4 +1,3 @@
-// const express = require('express');
 const { Router } = require('express');
 const { SalesController } = require('../controllers/sales.controller');
 const { TokenValidation } = require('../middleware/tokenValidation');
