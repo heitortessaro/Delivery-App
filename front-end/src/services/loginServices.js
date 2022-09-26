@@ -6,7 +6,7 @@ const URL_USER = 'http://localhost:3001/user';
 export const login = async ({ email, password }) => {
   try {
     const result = await axios.post(URL_LOGIN, { email, password });
-    return result;
+    return result.data;
   } catch (error) {
     return null;
   }
