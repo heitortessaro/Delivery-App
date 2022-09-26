@@ -8,6 +8,7 @@ import './styles/customerProduct.css';
 export default function CustomerProducts() {
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
+
   const receiveProducts = async () => {
     const receivedProducts = await getProducts();
     setProducts(receivedProducts);

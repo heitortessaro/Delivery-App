@@ -17,8 +17,8 @@ const addQuantityKey = (productArray) => {
 
 const getProducts = async () => {
   try {
-    const result = await axios.post(URL);
-    const products = addQuantityKey(result);
+    const result = await axios.get(URL);
+    const products = addQuantityKey(result.data);
     return products;
   } catch (error) {
     return [];
