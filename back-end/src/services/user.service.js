@@ -35,7 +35,8 @@ class UserService {
     if (registeredUser) throw new CustomError(409, 'User already registered');
     await this.userModel
       .create({ name, email, password: hashedPassword, role: 'customer' });
-    const newUser = await this.userModel.findOne({where: {name, email, password: hashedPassword}});
+    const newUser = await this.userModel
+      .findOne({ where: { name, email, password: hashedPassword } });
     return { message: 'Created', newUser };
   }
 }
