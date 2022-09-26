@@ -7,18 +7,19 @@ import './styles/customerProduct.css';
 
 export default function CustomerProducts() {
   const [products, setProducts] = useState([]);
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState((0).toFixed(2));
 
   const receiveProducts = async () => {
     const receivedProducts = await getProducts();
     setProducts(receivedProducts);
   };
 
-  const changeQuantity = (i, addQtty) => {
-    const newQtty = products[i].quantity + addQtty;
+  const changeQuantity = (id, addQtty) => {
+    const index = products.findIndex((p) => p.id === id);
+    const newQtty = products[index].quantity + addQtty;
     if (newQtty >= 0) {
       const newProducts = products;
-      newProducts[i].quantity = newQtty;
+      newProducts[index].quantity = newQtty;
       setProducts(newProducts);
       setTotal(computeTotalCart(products));
     }
@@ -28,20 +29,19 @@ export default function CustomerProducts() {
     receiveProducts();
   }, []);
 
-  console.log(total);
   return (
     <section className="customer-products">
       <NavClient selected="produtos" customer="Nome usuário" showProducts />
       <div className="card_shelf">
         {products.length > 0 && (
-          products.map((p, i) => (
+          products.map((p) => (
             <ProductCard
-              key={ `${p.name + i}` }
+              key={ `${p.name + p.id}` }
               name={ p.name }
-              value={ p.value }
-              image={ p.image }
+              value={ p.price }
+              image={ p.urlImage }
               quantity={ p.quantity }
-              id={ i }
+              id={ p.id }
               quantityHandler={ changeQuantity }
             />
           ))
