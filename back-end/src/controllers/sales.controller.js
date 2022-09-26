@@ -20,6 +20,13 @@ class SalesController {
         const result = await this.salesService.addSale(req.body);
         return res.status(201).json(result);
     }
+
+    async updateStatus(req, res) {
+        const { id } = req.params;
+        const { status } = req.body;
+        const result = await this.salesService.updateStatus(id, status);
+        return res.status(200).json(result);
+    }
 }
 
 module.exports = {

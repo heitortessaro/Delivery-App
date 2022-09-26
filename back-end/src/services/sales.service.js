@@ -1,4 +1,5 @@
 const { sale, product, saleProduct } = require('../database/models');
+const { CustomError } = require('../helpers/customError');
 
 class SalesService {
     constructor(salesModel = sale, saleProductModel = saleProduct) {
@@ -34,13 +35,20 @@ class SalesService {
         const saleObj = newSale;
         delete saleObj.products;
         const date = Date.now();
-        await this.salesModel.create({ ...saleObj, saleDate: date });
+        await this.salesModel.create({ ...saleObj, saleDate: date, status: 'Pendente' });
         const { id } = await this.salesModel.findOne({ where: { ...saleObj, saleDate: date } });
         products.forEach(async (p) => {
             await this.saleProductModel
             .create({ saleId: id, productId: p.id, quantity: p.quantity });
         });
         return { id };
+    }
+
+    async updateStatus(id, status) {
+        const findSale = await this.salesModel.findByPk(id);
+        if (!findSale) throw new CustomError(404, 'Sale not found');
+        await this.salesModel.update({ status }, { where: { id } });
+        return { message: 'Updated' };
     }
 }
 
