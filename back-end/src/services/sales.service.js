@@ -12,7 +12,8 @@ class SalesService {
     }
 
     async getSaleById(id) {
-        const userSale = await this.salesModel.findByPk(id, {include:{ model: product, as: 'products', through: { attributes: ['quantity'] }}});
+        const userSale = await this.salesModel.findByPk(id, { include: 
+            { model: product, as: 'products', through: { attributes: ['quantity'] } } });
         return userSale;
     }
 
@@ -23,9 +24,9 @@ class SalesService {
         const date = Date.now();
         await this.salesModel.create({ ...saleObj, saleDate: date });
         const { id } = await this.salesModel.findOne({ where: { ...saleObj, saleDate: date } });
-        products.forEach(async (product) => {
+        products.forEach(async (p) => {
             await this.saleProductModel
-            .create({ saleId: id, productId: product.id, quantity: product.quantity });
+            .create({ saleId: id, productId: p.id, quantity: p.quantity });
         });
         return { id };
     }
