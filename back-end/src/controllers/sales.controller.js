@@ -10,6 +10,11 @@ class SalesController {
         return res.status(200).json(result);
     }
 
+    async getSaleById(req, res) {
+        const result = await this.salesService.getSaleById(req.params.id);
+        return res.status(200).json(result);
+    }
+
     async createSale(req, res) {
         const result = await this.salesService.addSale(req.body);
         return res.status(201).json(result);

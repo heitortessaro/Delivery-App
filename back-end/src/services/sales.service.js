@@ -1,5 +1,4 @@
-const { sale } = require('../database/models');
-const { saleProduct } = require('../database/models');
+const { sale, product, saleProduct } = require('../database/models');
 
 class SalesService {
     constructor(salesModel = sale, saleProductModel = saleProduct) {
@@ -10,6 +9,11 @@ class SalesService {
     async getSales() {
         const sales = await this.salesModel.findAll();
         return sales;
+    }
+
+    async getSaleById(id) {
+        const userSale = await this.salesModel.findByPk(id, {include:{ model: product, as: 'products', through: { attributes: ['quantity'] }}});
+        return userSale;
     }
 
     async addSale(newSale) {
