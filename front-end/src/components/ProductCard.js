@@ -61,7 +61,7 @@ ProductCard.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  quantity: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  quantity: PropTypes.number.isRequired,
+  id: PropTypes.number.isRequired,
   quantityHandler: PropTypes.func.isRequired,
 };
