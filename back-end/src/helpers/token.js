@@ -13,7 +13,6 @@ class Token {
 
   verify(token) {
     const data = jwt.verify(token, this.secret);
-
     return data;
   }
 }
