@@ -10,9 +10,12 @@ export default function ProductCard(
   return (
     <div className="product_card">
       <div className="product_price">
-        <span data-testid={ `customer_products__element-card-price-${id}` }>
-          {`R$ ${value}`}
-        </span>
+        <p>
+          R$
+          <span data-testid={ `customer_products__element-card-price-${id}` }>
+            {value.toString().replace('.', ',')}
+          </span>
+        </p>
       </div>
       <figure className="product_image_container">
         <img
@@ -46,7 +49,7 @@ export default function ProductCard(
           <button
             type="button"
             className="product-btn-rigth "
-            data-testid={ `customer_products__button-card-add-item--${id}` }
+            data-testid={ `customer_products__button-card-add-item-${id}` }
             onClick={ () => quantityHandler(id, plusOne) }
           >
             +
