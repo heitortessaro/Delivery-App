@@ -18,6 +18,11 @@ class UserController {
     const { newUser, message } = await this.userService.addUser(name, email, password);
     res.status(201).json({ message, newUser });
   }
+
+  async getUsers(_req, res) {
+    const users = await this.userService.getUsers();
+    res.status(200).json(users);
+  }
 }
 
 module.exports = {
