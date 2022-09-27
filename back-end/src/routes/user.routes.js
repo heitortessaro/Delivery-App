@@ -13,5 +13,6 @@ router.post(
 );
 
 router.post('/user', (req, res) => userController.addUser(req, res));
+router.get('/user', (req, res) => userController.getUsers(req, res));
 
 module.exports = router;
