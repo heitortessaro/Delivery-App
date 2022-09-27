@@ -37,6 +37,11 @@ class UserService {
       .create({ name, email, password: hashedPassword, role: 'customer' });
     return { message: 'Created' };
   }
+
+  async getUsers() {
+    const users = await this.userModel.findAll({ attributes: { exclude: 'password' } });
+    return users;
+  }
 }
 
 module.exports = {
