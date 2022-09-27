@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import ProductList from '../components/ProductList';
 import Context from '../context/Context';
 import { getSalers } from '../services/SalesServices';
@@ -7,43 +7,80 @@ import './styles/checkout.css';
 
 // const simulateprodutos = [{
 //   id: 5,
-//   descrption: 'cerveja',
-//   valueUnit: 12.0,
+//   name: 'cerveja',
+//   price: 12.0,
 //   quantity: 2,
 // },
 // {
 //   id: 5,
-//   descrption: 'cerveja',
+//   name: 'cerveja',
 //   quantity: 2,
-//   valueUnit: 12.0,
+//   price: 12.0,
 // },
 // {
 //   id: 4,
-//   descrption: 'vodca',
+//   name: 'vodca',
 //   quantity: 1,
-//   valueUnit: 22.5,
+//   price: 22.5,
 // }];
 
 // localStorage.setItem('checkoutProducts', JSON.stringify(simulateprodutos));
 
 export default function Checkout() {
-  const { checkoutTotalValue, setCheckoutTotalValue } = useContext(Context);
+  const [checkoutTotalValue, setCheckoutTotalValue] = useState();
   const { sales, setsales } = useContext(Context);
   const { checkout } = useContext(Context);
+  const [inpustAdress, setInpustAdress] = useState({
+    deliveryAddress: '',
+    deliveryNumber: '',
+    sellerId: '',
+  });
   const productsCheckouts = JSON.parse(localStorage.getItem('checkoutProducts'));
   const allSales = getSalers();
   setsales(allSales);
+  const order = {
+    userId: '',
+    sellerId: '',
+    totalPrice: '',
+    deliveryAddress: '',
+    deliveryNumber: '',
+    products: [
+    ] };
 
-  useEffect(() => {
+  const handleInput = ({ target }) => {
+    setInpustAdress({ ...inpustAdress, [target.name]: target.value });
+  };
+
+  const handleSelect = ({ target }) => {
+    setInpustAdress({ ...inpustAdress, sellerId: target.value });
+  };
+
+  console.log(inpustAdress);
+  const setingOrder = () => {
+    order.products = [];
+    productsCheckouts.map((product) => {
+      order.products.push({ id: product.id, quantity: product.quantity });
+      return null;
+    });
+    order.deliveryAddress = inpustAdress.deliveryAddress;
+    order.deliveryNumber = inpustAdress.deliveryNumber;
+  };
+
+  const CalculatepriceTotal = () => {
     let total = 0;
     if (productsCheckouts) {
       productsCheckouts.map((product) => {
-        const subTotal = (product.valueUnit * product.quantity);
-        total += subTotal;
-        return total;
+        total += (product.price * product.quantity);
+        setCheckoutTotalValue(total);
+        return null;
       });
     }
-    setCheckoutTotalValue(total);
+  };
+
+  useEffect(() => {
+    CalculatepriceTotal();
+    setingOrder();
+    console.log(order);
   }, [checkout]);
 
   return (
@@ -87,12 +124,16 @@ export default function Checkout() {
         <div className="inputs_info">
           <label htmlFor="vendedor">
             P. Vendedor Responsvel
-            <select data-testid="customer_checkout__select-seller">
+            <select
+              value={ inpustAdress.sellerId }
+              data-testid="customer_checkout__select-seller"
+              onChange={ handleSelect }
+            >
               { !sales ? (
                 sales.map((sale, index) => (
-                  <option key={ index }>{sale.name}</option>
+                  <option key={ index } value={ sale.id }>{sale.name}</option>
                 ))
-              ) : <option>Carregando</option> }
+              ) : <option value={ 1 }>Carregando</option>}
             </select>
           </label>
           <label htmlFor="endereco">
@@ -100,7 +141,8 @@ export default function Checkout() {
             <input
               className="formAdress"
               type="text"
-              name="endereco"
+              name="deliveryAddress"
+              onChange={ handleInput }
               data-testid="customer_checkout__input-address"
             />
           </label>
@@ -108,8 +150,9 @@ export default function Checkout() {
             Numero
             <input
               className="formNumber"
-              type="number"
-              name="number"
+              type="text"
+              name="deliveryNumber"
+              onChange={ handleInput }
               data-testid="customer_checkout__input-address-number"
             />
           </label>

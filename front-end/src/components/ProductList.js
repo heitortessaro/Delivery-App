@@ -4,7 +4,7 @@ import './styles/ProductList.css';
 import Context from '../context/Context';
 
 export default function ProductList({ produtc, itemNumber, removeButton }) {
-  const subTotal = produtc.valueUnit * produtc.quantity;
+  const subTotal = produtc.price * produtc.quantity;
   const { setCheckout } = useContext(Context);
   const productsCheckouts = JSON.parse(localStorage.getItem('checkoutProducts'));
 
@@ -17,7 +17,6 @@ export default function ProductList({ produtc, itemNumber, removeButton }) {
     );
     const updateStorage = productsCheckouts.find((produto) => produto.id === produtc.id);
     setCheckout(updateStorage);
-    console.log(updateStorage);
   };
   return (
     <div className="box_pd_info">
@@ -36,7 +35,7 @@ export default function ProductList({ produtc, itemNumber, removeButton }) {
             `customer_checkout__element-order-table-name-${itemNumber}`
           }
         >
-          { produtc.descrption }
+          { produtc.name }
 
         </p>
       </div>
@@ -57,7 +56,7 @@ export default function ProductList({ produtc, itemNumber, removeButton }) {
           }
         >
           R$
-          { produtc.valueUnit }
+          { produtc.price }
         </p>
       </div>
       <div className="pd_subTotal">
@@ -93,8 +92,8 @@ export default function ProductList({ produtc, itemNumber, removeButton }) {
 ProductList.propTypes = {
   produtc: PropTypes.shape({
     id: PropTypes.number,
-    descrption: PropTypes.string,
-    valueUnit: PropTypes.number,
+    name: PropTypes.string,
+    price: PropTypes.number,
     quantity: PropTypes.number,
   }).isRequired,
   itemNumber: PropTypes.number.isRequired,
