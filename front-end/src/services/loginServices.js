@@ -14,10 +14,10 @@ export const login = async ({ email, password }) => {
 
 export const createUser = async ({ name, password, email }) => {
   try {
-    const result = axios.post(URL_USER, { name, password, email });
-    return result;
+    const { data } = await axios.post(URL_USER, { name, password, email });
+    return data;
   } catch (error) {
-    return null;
+    return { error: error.response };
   }
 };
 
