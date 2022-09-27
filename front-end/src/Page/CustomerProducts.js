@@ -7,22 +7,42 @@ import { getProducts, computeTotalCart } from '../services/productsServices';
 import './styles/customerProduct.css';
 
 export default function CustomerProducts() {
-  const [products, setProducts] = useLocalStorage({ key: 'products', defaultValue: [] });
+  const [checkoutProducts, setCheckoutProducts] = useLocalStorage(
+    { key: 'checkoutProducts', defaultValue: [] },
+  );
+  const [products, setProducts] = useState([]);
   const [total, setTotal] = useState((0).toFixed(2));
+
+  const updateQuantity = (receivedProducts) => {
+    const newProducts = receivedProducts;
+    checkoutProducts.forEach((p) => {
+      const index = newProducts.findIndex((p2) => p2.id === p.id);
+      newProducts[index].quantity = p.quantity;
+    });
+    setProducts(newProducts);
+  };
 
   const receiveProducts = async () => {
     const receivedProducts = await getProducts();
-    setProducts(receivedProducts);
+    if (checkoutProducts.length > 0) {
+      updateQuantity(receiveProducts);
+    } else {
+      setProducts(receivedProducts);
+    }
   };
 
-  const changeQuantity = (id, addQtty) => {
+  const changeQuantity = (id, addQtty, operation) => {
     const index = products.findIndex((p) => p.id === id);
-    const newQtty = products[index].quantity + addQtty;
+    let newQtty;
+    console.log(`addqtty: ${addQtty},    operation: ${operation}`);
+    if (operation === 'sum') newQtty = products[index].quantity + addQtty;
+    if (operation === 'change' && addQtty >= 0) newQtty = addQtty;
     if (newQtty >= 0) {
       const newProducts = products;
       newProducts[index].quantity = newQtty;
       setProducts(newProducts);
       setTotal(computeTotalCart(products));
+      setCheckoutProducts(newProducts.map((p) => p.quantity > 0));
     }
   };
 
