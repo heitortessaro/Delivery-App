@@ -1,0 +1,25 @@
+.customer-products {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.card_shelf {
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px;
+  justify-content: space-around;
+  margin: auto;
+  margin-bottom: 70px;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+.tag_shelf {
+  bottom: +30px;
+  position: fixed;
+  right: +30px;
+}
