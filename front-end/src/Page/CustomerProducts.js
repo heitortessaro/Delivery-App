@@ -13,8 +13,8 @@ export default function CustomerProducts() {
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState((0).toFixed(2));
 
-  const updateQuantity = () => {
-    const newProducts = products;
+  const updateQuantity = (receivedProducts) => {
+    const newProducts = receivedProducts;
     checkoutProducts.forEach((p) => {
       const index = newProducts.findIndex((p2) => p2.id === p.id);
       newProducts[index].quantity = p.quantity;
@@ -24,8 +24,11 @@ export default function CustomerProducts() {
 
   const receiveProducts = async () => {
     const receivedProducts = await getProducts();
-    setProducts(receivedProducts);
-    updateQuantity();
+    if (checkoutProducts.length > 0) {
+      updateQuantity(receiveProducts);
+    } else {
+      setProducts(receivedProducts);
+    }
   };
 
   const changeQuantity = (id, addQtty, operation) => {

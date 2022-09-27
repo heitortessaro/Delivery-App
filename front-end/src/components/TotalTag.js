@@ -12,7 +12,8 @@ export default function TotalTag(
       type="button"
       data-testid="customer_products__checkout-bottom-value"
       className="total_tag"
-      onClick={ () => navigate() }
+      disabled={ total === '0.00' }
+      onClick={ () => navigate('localhost:3000/customer/checkout') }
     >
       {`Ver Carrinho: R$ ${total.toString().replace('.', ',')}`}
     </button>
