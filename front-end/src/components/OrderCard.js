@@ -1,14 +1,14 @@
 import './styles/productCard.css';
 import PropTypes from 'prop-types';
 
-export default function ProductCard(
+export default function OrderCard(
   { id, orderNum, status, date, price, adress, showAdress },
 ) {
   return (
     <div className="product_card">
       <div className="order_number">
         <p>
-          Pedido
+          {'Pedido '}
           <span data-testid={ `seller_orders__element-order-${id}` }>{orderNum}</span>
         </p>
       </div>
@@ -44,7 +44,7 @@ export default function ProductCard(
   );
 }
 
-ProductCard.propTypes = {
+OrderCard.propTypes = {
   id: PropTypes.number.isRequired,
   orderNum: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,

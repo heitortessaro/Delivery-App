@@ -1,9 +1,8 @@
 const axios = require('axios');
 
-const user = JSON.parse(window.localStorage.getItem('user')).name;
 const URL = 'http://localhost:3001/sales';
 
-const getOrders = async () => {
+const getOrders = async (user) => {
   try {
     const result = await axios.get(URL, { headers: {
       authorization: user.token,
