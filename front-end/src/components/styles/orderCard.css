@@ -1,0 +1,93 @@
+:root {
+
+  --main-color: #036b52;
+
+  --logout: #056cf9;
+
+  --user: #320d88;
+
+  --selected: #2fc18c;
+}
+
+.order_card {
+  border: 1px solid #b1c2be;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  width: 400px;
+}
+
+.order_number {
+  align-items: center;
+  background-color: white;
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;
+  min-height: 100%;
+  width: 100px;
+}
+
+.order_number p {
+  display: block;
+  font-size: 18px;
+  margin: 0;
+  text-align: center;
+}
+
+.order_number span {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.order_main {
+  background-color: #b1c2be;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 10;
+}
+
+.order_main p {
+  margin: 0;
+}
+
+.order_up {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.order_status_pendente {
+  align-items: center;
+  background-color: #ccb800a7;
+  display: flex;
+  flex-grow: 1;
+  height: 100px;
+  justify-content: center;
+}
+
+.order_status_pendente p {
+  display: block;
+  font-size: 25px;
+  font-weight: 600;
+}
+
+.order_date_price {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-evenly;
+  padding: 0 10px;
+}
+
+.order_price, .order_date {
+  background-color: #f2fffcac;
+  border-radius: 10px;
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 5px 0;
+  text-align: center;
+}
+
+.order_down {
+  padding: 5px 10px;
+  text-align: right;
+}
