@@ -13,3 +13,7 @@
 .total_tag:hover {
   box-shadow: 0 0 16px rgba(255, 255, 255, 0.436);
 }
+
+.total_tag p {
+  margin: 0;
+}
