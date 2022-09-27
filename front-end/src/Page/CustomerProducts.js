@@ -12,9 +12,11 @@ export default function CustomerProducts() {
   );
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState((0).toFixed(2));
+  const userName = JSON.parse(window.localStorage.getItem('user')).name;
 
   const updateQuantity = (receivedProducts) => {
     const newProducts = receivedProducts;
+    console.log(receivedProducts);
     checkoutProducts.forEach((p) => {
       const index = newProducts.findIndex((p2) => p2.id === p.id);
       newProducts[index].quantity = p.quantity;
@@ -34,7 +36,6 @@ export default function CustomerProducts() {
   const changeQuantity = (id, addQtty, operation) => {
     const index = products.findIndex((p) => p.id === id);
     let newQtty;
-    console.log(`addqtty: ${addQtty},    operation: ${operation}`);
     if (operation === 'sum') newQtty = products[index].quantity + addQtty;
     if (operation === 'change' && addQtty >= 0) newQtty = addQtty;
     if (newQtty >= 0) {
@@ -42,7 +43,7 @@ export default function CustomerProducts() {
       newProducts[index].quantity = newQtty;
       setProducts(newProducts);
       setTotal(computeTotalCart(products));
-      setCheckoutProducts(newProducts.map((p) => p.quantity > 0));
+      setCheckoutProducts(newProducts.filter((p) => p.quantity > 0));
     }
   };
 
@@ -52,7 +53,7 @@ export default function CustomerProducts() {
 
   return (
     <section className="customer-products">
-      <NavClient selected="produtos" customer="Nome usuário" showProducts />
+      <NavClient selected="produtos" customer={ userName } showProducts />
       <div className="card_shelf">
         {products.length > 0 && (
           products.map((p) => (

@@ -1,78 +1,76 @@
 :root {
 
-  --main-color: #036B52;
+  --main-color: #036b52;
 
-  --logout: #056CF9;
+  --logout: #056cf9;
 
   --user: #320d88;
 
-  --selected: #2FC18C;
+  --selected: #2fc18c;
 }
 
 .navbar_bg {
+  background: var(--main-color);
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   height: 75px;
+  justify-content: space-between;
   left: 0%;
   right: 0%;
   top: 0.01px;
-  background: var(--main-color);
-};
-
-.customer {}
+}
 
 .logout {
-  margin: 0;
+  background-color: var(--logout);
   border: 0;
   border-radius: 0;
-  min-width: 300px;
-  height: 75px;
-  font-size: 26px;
-  text-align: center;
-  background-color: var(--logout);
   color: white;
+  font-size: 26px;
+  height: 75px;
+  margin: 0;
+  min-width: 300px;
+  text-align: center;
 }
 
 .customer {
-  margin: 0;
+  background-color: var(--user);
   border: 0;
   border-radius: 0;
-  min-width: 300px;
-  height: 75px;
-  font-size: 26px;
-  text-align: center;
-  background-color: var(--user);
   color: white;
+  font-size: 26px;
+  height: 75px;
+  margin: 0;
+  min-width: 300px;
+  text-align: center;
 }
 
 .selected {
-  margin: 0;
+  background-color: var(--selected);
   border: 0;
   border-radius: 0;
-  min-width: 300px;
-  height: 75px;
-  font-size: 26px;
-  text-align: center;
-  background-color: var(--selected);
   color: black;
+  font-size: 26px;
+  height: 75px;
+  margin: 0;
+  min-width: 300px;
+  text-align: center;
 }
 
 .no_selected {
-  margin: 0;
+  background-color: var(--main-color);
   border: 0;
   border-radius: 0;
-  min-width: 300px;
-  height: 75px;
-  font-size: 26px;
-  text-align: center;
-  background-color: var(--main-color);
   color: white;
+  font-size: 26px;
+  height: 75px;
+  margin: 0;
+  min-width: 300px;
+  text-align: center;
 }
 
 .no_selected:hover, .selected:hover, .logout:hover, .customer:hover {
-  height: 71px;
-  min-width: 296px;
   border: 2px solid white;
   cursor: pointer;
+  height: 71px;
+  min-width: 296px;
 }
