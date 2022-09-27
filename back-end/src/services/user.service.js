@@ -39,6 +39,11 @@ class UserService {
       .findOne({ where: { name, email, password: hashedPassword } });
     return { message: 'Created', newUser };
   }
+
+  async getUsers() {
+    const users = await this.userModel.findAll({ attributes: { exclude: 'password' } });
+    return users;
+  }
 }
 
 module.exports = {

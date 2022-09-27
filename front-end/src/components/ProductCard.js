@@ -1,4 +1,3 @@
-import React from 'react';
 import './styles/productCard.css';
 import PropTypes from 'prop-types';
 
@@ -37,20 +36,24 @@ export default function ProductCard(
             type="button"
             className="product-btn-left"
             data-testid={ `customer_products__button-card-rm-item-${id}` }
-            onClick={ () => quantityHandler(id, minusOne) }
+            onClick={ () => quantityHandler(id, minusOne, 'sum') }
           >
             -
           </button>
-          <div className="product_quantity">
-            <span data-testid={ `customer_products__input-card-quantity-${id}` }>
-              {quantity}
-            </span>
-          </div>
+          <input
+            className="product_quantity"
+            type="text"
+            data-testid={ `customer_products__input-card-quantity-${id}` }
+            value={ quantity }
+            onChange={
+              ({ target }) => quantityHandler(id, Number(target.value), 'change')
+            }
+          />
           <button
             type="button"
             className="product-btn-rigth "
             data-testid={ `customer_products__button-card-add-item-${id}` }
-            onClick={ () => quantityHandler(id, plusOne) }
+            onClick={ () => quantityHandler(id, plusOne, 'sum') }
           >
             +
           </button>

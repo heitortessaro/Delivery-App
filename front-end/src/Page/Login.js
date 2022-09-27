@@ -51,11 +51,11 @@ function Login() {
       setErrorMessage('usuario Invalido');
       return null;
     }
-    localStorage.setItem('keyLocalStorage', JSON.stringify(result));
+    localStorage.setItem('user', JSON.stringify(result));
 
-    if (result.data.role === 'customer') navigate('/customer/products');
-    if (result.data.role === 'administrator') navigate('/admin/manage');
-    if (result.data.role === 'seller') navigate('/seller/orders');
+    if (result.role === 'customer') navigate('/customer/products');
+    if (result.role === 'administrator') navigate('/admin/manage');
+    if (result.role === 'seller') navigate('/seller/orders');
   };
 
   return (
