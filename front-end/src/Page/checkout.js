@@ -27,7 +27,7 @@ import './styles/checkout.css';
 // localStorage.setItem('checkoutProducts', JSON.stringify(simulateprodutos));
 
 export default function Checkout() {
-  const [checkoutTotalValue, setCheckoutTotalValue] = useState();
+  const { checkoutTotalValue, setCheckoutTotalValue } = useContext(Context);
   const { sales, setsales } = useContext(Context);
   const { checkout } = useContext(Context);
   const [inpustAdress, setInpustAdress] = useState({
@@ -41,7 +41,7 @@ export default function Checkout() {
   const order = {
     userId: '',
     sellerId: '',
-    totalPrice: '',
+    totalPrice: 0,
     deliveryAddress: '',
     deliveryNumber: '',
     products: [
@@ -64,6 +64,7 @@ export default function Checkout() {
     });
     order.deliveryAddress = inpustAdress.deliveryAddress;
     order.deliveryNumber = inpustAdress.deliveryNumber;
+    order.sellerId = inpustAdress.sellerId;
   };
 
   const CalculatepriceTotal = () => {
@@ -72,6 +73,7 @@ export default function Checkout() {
       productsCheckouts.map((product) => {
         total += (product.price * product.quantity);
         setCheckoutTotalValue(total);
+        order.totalPrice = total;
         return null;
       });
     }
