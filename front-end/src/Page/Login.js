@@ -51,7 +51,7 @@ function Login() {
       setErrorMessage('usuario Invalido');
       return null;
     }
-    localStorage.setItem('keyLocalStorage', JSON.stringify(result));
+    localStorage.setItem('user', JSON.stringify(result));
 
     if (result.role === 'customer') navigate('/customer/products');
     if (result.role === 'administrator') navigate('/admin/manage');
