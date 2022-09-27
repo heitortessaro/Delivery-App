@@ -1,24 +1,22 @@
-import './styles/productCard.css';
+import './styles/orderCard.css';
 import PropTypes from 'prop-types';
 
 export default function OrderCard(
   { id, orderNum, status, date, price, adress, showAdress },
 ) {
   return (
-    <div className="product_card">
+    <div className="order_card">
       <div className="order_number">
         <p>
           {'Pedido '}
+          <br />
           <span data-testid={ `seller_orders__element-order-${id}` }>{orderNum}</span>
         </p>
       </div>
       <div className="order_main">
         <div className="order_up">
-          <div
-            className="order_status"
-            data-testid={ `seller_orders__element-delivery-status-${id}` }
-          >
-            {status}
+          <div className={ `order_status_${status.toLowerCase()}` }>
+            <p data-testid={ `seller_orders__element-delivery-status-${id}` }>{status}</p>
           </div>
           <div className="order_date_price">
             <p
