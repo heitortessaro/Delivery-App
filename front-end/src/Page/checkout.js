@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from 'react';
-import ProductList from '../Components/ProductList';
+import ProductList from '../components/ProductList';
 import Context from '../context/Context';
-import getSales from '../services/SalesServices';
+import { getSalers } from '../services/SalesServices';
+import NavClient from '../components/NavClient';
 import './styles/checkout.css';
 
 // const simulateprodutos = [{
@@ -28,55 +29,59 @@ import './styles/checkout.css';
 export default function Checkout() {
   const { checkoutTotalValue, setCheckoutTotalValue } = useContext(Context);
   const { sales, setsales } = useContext(Context);
-  const { checkout, setCheckout } = useContext(Context);
+  const { checkout } = useContext(Context);
   const productsCheckouts = JSON.parse(localStorage.getItem('checkoutProducts'));
+  const allSales = getSalers();
+  setsales(allSales);
 
   useEffect(() => {
     let total = 0;
-    productsCheckouts.map((product) => {
-      const subTotal = product.valueUnit * product.quantity;
-      total += subTotal;
-      return total;
-    });
-    const allSales = getSales();
-    setsales(allSales);
+    if (productsCheckouts) {
+      productsCheckouts.map((product) => {
+        const subTotal = (product.valueUnit * product.quantity);
+        total += subTotal;
+        return total;
+      });
+    }
     setCheckoutTotalValue(total);
-  }, [checkout, sales]);
+  }, [checkout]);
 
   return (
     <section className="box_section">
-      { !productsCheckouts
-        ? null
-        : (
-          <div>
-            <h3>Finalizar pedido</h3>
-            <div className="box_Pedidos">
-              <div className="table_products">
-                <p className="item">item</p>
-                <p className="descrp">Descricao</p>
-                <p className="quant">quantidade</p>
-                <p className="value">Valor Unitario</p>
-                <p className="subTotal">subTotal</p>
-                <p className="Remover">Remover Item</p>
-              </div>
-              { productsCheckouts.map((product, index) => (
-                <div key={ index }>
-                  <ProductList
-                    produtc={ product }
-                    itemNumber={ index }
-                    removeButton
-                  />
-                </div>
-              )) }
-              <div className="checkout_TotalValue">
-                <p data-testid="customer_checkout__element-order-total-price">
-                  Total: R$
-                  { checkoutTotalValue }
-                </p>
-              </div>
-            </div>
+      <NavClient selected="produtos" customer="teste" showProducts />
+      <div>
+        <h3>Finalizar pedido</h3>
+        <div className="box_Pedidos">
+          <div className="table_products">
+            <p className="item">item</p>
+            <p className="descrp">Descricao</p>
+            <p className="quant">quantidade</p>
+            <p className="value">Valor Unitario</p>
+            <p className="subTotal">subTotal</p>
+            <p className="Remover">Remover Item</p>
           </div>
-        )}
+          { !productsCheckouts
+            ? null
+            : (
+              <div>
+                { productsCheckouts.map((product, index) => (
+                  <div key={ index }>
+                    <ProductList
+                      produtc={ product }
+                      itemNumber={ index }
+                      removeButton
+                    />
+                  </div>
+                )) }
+                <div className="checkout_TotalValue">
+                  <p data-testid="customer_checkout__element-order-total-price">
+                    Total: R$
+                    { checkoutTotalValue }
+                  </p>
+                </div>
+              </div>)}
+        </div>
+      </div>
       <h3>Detalhes e enderecos para entrega</h3>
       <form className="box_Detail">
         <div className="inputs_info">
@@ -87,7 +92,7 @@ export default function Checkout() {
                 sales.map((sale, index) => (
                   <option key={ index }>{sale.name}</option>
                 ))
-              ) : <option k>Carregando</option> }
+              ) : <option>Carregando</option> }
             </select>
           </label>
           <label htmlFor="endereco">

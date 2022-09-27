@@ -1,9 +1,16 @@
-const getSales = async () => {
-  const url = 'http://localhost:3001/sales';
-  const response = await fetch(url);
-  const result = response.json();
-  console.log(result);
-  return result;
-};
+import axios from 'axios';
 
-export default getSales;
+const dataUser = JSON.parse(localStorage.getItem('keyLocalStorage'));
+const URL_SALES = 'http://localhost:3001/sales';
+
+export const getSalers = async () => {
+  try {
+    const { data } = await axios.get(URL_SALES, { headers: {
+      Authorization: dataUser.data.token,
+    } });
+    return data;
+  } catch (error) {
+    return { error: error.response };
+  }
+};
+export default { getSalers };

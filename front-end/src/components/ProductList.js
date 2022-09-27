@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-import './Styles/ProductList.css';
+import './styles/ProductList.css';
 import Context from '../context/Context';
 
 export default function ProductList({ produtc, itemNumber, removeButton }) {

@@ -27,7 +27,7 @@ export default function CustomerProducts({ selected, customer, showProducts }) {
           className={ ` ${selected === 'pedidos' ? 'selected' : 'no_selected'}` }
           data-testid="customer_products__element-navbar-link-orders"
           type="button"
-          onClick={ () => navigate('') }
+          onClick={ () => navigate('/customer/checkout') }
         >
           MEUS PEDIDOS
         </button>

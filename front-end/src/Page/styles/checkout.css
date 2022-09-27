@@ -1,7 +1,17 @@
+.box_section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: -100px;
+}
+
 .table_products {
   align-items: baseline;
   display: flex;
+  justify-content: center;
+  width: 100vh;
 }
+
 
 .descrp {
   text-align: center;
@@ -37,7 +47,7 @@
   font-size: 25px;
   height: 70px;
   justify-content: center;
-  margin-left: 83%;
+  margin-left: 82vh;
   width: 155px;
 }
 
@@ -47,6 +57,7 @@
   border-radius: 15px;
   height: 400px;
   padding: 20px;
+  width: 100vh;
 }
 
 .box_Detail {
@@ -55,12 +66,13 @@
   border-radius: 15px;
   height: 120px;
   padding: 20px;
+  width: 100vh;
 }
 
 .box_Detail label {
   display: flex;
   flex-direction: column;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .inputs_info {
