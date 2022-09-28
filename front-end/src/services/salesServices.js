@@ -4,8 +4,8 @@ const URL_SALES = 'http://localhost:3001/sales';
 
 export const postSale = async (order) => {
   try {
-    const { id } = await axios.post(URL_SALES, order);
-    return id;
+    const { data } = await axios.post(URL_SALES, order);
+    return data.id;
   } catch (error) {
     return { error: error.response };
   }

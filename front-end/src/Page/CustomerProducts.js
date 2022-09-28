@@ -27,7 +27,7 @@ export default function CustomerProducts() {
   const receiveProducts = async () => {
     const receivedProducts = await getProducts();
     if (checkoutProducts.length > 0) {
-      updateQuantity(receiveProducts);
+      updateQuantity(receivedProducts);
     } else {
       setProducts(receivedProducts);
     }

@@ -4,19 +4,28 @@ import ProductList from '../components/ProductList';
 import Context from '../context/Context';
 import NavClient from '../components/NavClient';
 import { postSale } from '../services/salesServices';
+import { getSalers } from '../services/SalerServices';
 import './styles/checkout.css';
 
 export default function Checkout() {
   const navigate = useNavigate();
   const { checkoutTotalValue, setCheckoutTotalValue } = useContext(Context);
-  const { allSalser } = useContext(Context);
+  const { allSalser, setAllsaler } = useContext(Context);
   const { checkout } = useContext(Context);
   const [inpustAdress, setInpustAdress] = useState({
     deliveryAddress: '',
     deliveryNumber: '',
     sellerId: '',
   });
+
+  const getAllAlers = async () => {
+    const result = await getSalers();
+    setAllsaler(result);
+  };
+  getAllAlers();
+
   const productsCheckouts = JSON.parse(localStorage.getItem('checkoutProducts'));
+  const userStorage = JSON.parse(localStorage.getItem('user'));
   const order = {
     userId: '',
     sellerId: '',
@@ -34,7 +43,6 @@ export default function Checkout() {
     setInpustAdress({ ...inpustAdress, sellerId: target.value });
   };
 
-  console.log(inpustAdress);
   const setingOrder = () => {
     order.products = [];
     productsCheckouts.map((product) => {
@@ -43,7 +51,8 @@ export default function Checkout() {
     });
     order.deliveryAddress = inpustAdress.deliveryAddress;
     order.deliveryNumber = inpustAdress.deliveryNumber;
-    order.sellerId = inpustAdress.sellerId;
+    order.sellerId = Number(inpustAdress.sellerId);
+    order.userId = userStorage.id;
   };
 
   const CalculatepriceTotal = () => {
@@ -52,7 +61,7 @@ export default function Checkout() {
       productsCheckouts.map((product) => {
         total += (Number(product.price) * Number(product.quantity));
         setCheckoutTotalValue(total);
-        order.totalPrice = total;
+        order.totalPrice = total.toFixed(2);
         return null;
       });
     }
@@ -61,7 +70,6 @@ export default function Checkout() {
   useEffect(() => {
     CalculatepriceTotal();
     setingOrder();
-    console.log(order);
   }, [checkout]);
 
   const submitButton = async () => {
@@ -69,8 +77,9 @@ export default function Checkout() {
     setingOrder();
     console.log(order);
     const idRetunr = await postSale(order);
+    console.log(idRetunr);
     if (idRetunr) {
-      navigate(`/customer/sales:${idRetunr}`);
+      navigate(`/customer/sales/${idRetunr}`);
     } else {
       console.log(erro);
       return null;
@@ -79,7 +88,7 @@ export default function Checkout() {
 
   return (
     <section className="box_section">
-      <NavClient selected="produtos" customer="teste" showProducts />
+      <NavClient selected="produtos" customer={ userStorage.name } showProducts />
       <div>
         <h3>Finalizar pedido</h3>
         <div className="box_Pedidos">
@@ -125,7 +134,8 @@ export default function Checkout() {
               data-testid="customer_checkout__select-seller"
               onChange={ handleSelect }
             >
-              { !allSalser ? (
+              <option> selecione vendedor</option>
+              { allSalser ? (
                 allSalser.map((sale, index) => (
                   <option key={ index } value={ sale.id }>{sale.name}</option>
                 ))

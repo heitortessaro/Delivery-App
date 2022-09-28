@@ -7,7 +7,7 @@ function Provider({ children }) {
   const [checkoutTotalValue, setCheckoutTotalValue] = useState(0);
   const [sales, setsales] = useState([]);
   const [checkout, setCheckout] = useState();
-  const [allSalser, setAllsaler] = useState(getSalers());
+  const [allSalser, setAllsaler] = useState();
 
   const state = useMemo(() => ({
     checkoutTotalValue,
@@ -19,7 +19,6 @@ function Provider({ children }) {
     allSalser,
     setAllsaler,
   }), [checkoutTotalValue, checkout]);
-  console.log(checkoutTotalValue);
   return (
     <div>
       <Context.Provider value={ state }>
