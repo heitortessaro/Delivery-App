@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { useLocalStorage } from '@mantine/hooks';
 import NavClient from '../components/NavClient';
 import ProductCard from '../components/ProductCard';
 import TotalTag from '../components/TotalTag';
@@ -15,7 +14,6 @@ export default function CustomerProducts() {
 
   const updateQuantity = (receivedProducts) => {
     const newProducts = receivedProducts;
-    console.log(receivedProducts);
     checkoutProducts.forEach((p) => {
       const index = newProducts.findIndex((p2) => p2.id === p.id);
       newProducts[index].quantity = p.quantity;
@@ -45,7 +43,7 @@ export default function CustomerProducts() {
       setTotal(computeTotalCart(products));
       localStorage.setItem('checkoutProducts', JSON
         .stringify(newProducts.filter((p) => p.quantity > 0)));
-      setCheckoutProducts();
+      // setCheckoutProducts();
     }
   };
 

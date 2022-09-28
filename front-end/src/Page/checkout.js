@@ -6,11 +6,22 @@ import NavClient from '../components/NavClient';
 import { postSale } from '../services/salesServices';
 import { getSalers } from '../services/SalerServices';
 import './styles/checkout.css';
+import { computeTotalCart } from '../services/productsServices';
 
 export default function Checkout() {
   const navigate = useNavigate();
   const { checkoutTotalValue, setCheckoutTotalValue } = useContext(Context);
-  const { allSalser, setAllsaler } = useContext(Context);
+  const productsCheckouts = JSON.parse(localStorage.getItem('checkoutProducts'));
+  const userStorage = JSON.parse(localStorage.getItem('user'));
+  const order = {
+    userId: 0,
+    sellerId: 0,
+    totalPrice: 0,
+    deliveryAddress: '',
+    deliveryNumber: '',
+    products: [
+    ] };
+  const [allSellers, setAllSellers] = useState([]);
   const { checkout } = useContext(Context);
   const [inpustAdress, setInpustAdress] = useState({
     deliveryAddress: '',
@@ -18,28 +29,19 @@ export default function Checkout() {
     sellerId: '',
   });
 
-  const getAllAlers = async () => {
+  const getAllSellers = async () => {
     const result = await getSalers();
-    setAllsaler(result);
+    // console.log(result[0].id);
+    setAllSellers(result);
+    setInpustAdress({ ...inpustAdress, sellerId: result[0].id });
   };
-  getAllAlers();
-
-  const productsCheckouts = JSON.parse(localStorage.getItem('checkoutProducts'));
-  const userStorage = JSON.parse(localStorage.getItem('user'));
-  const order = {
-    userId: '',
-    sellerId: '',
-    totalPrice: 0,
-    deliveryAddress: '',
-    deliveryNumber: '',
-    products: [
-    ] };
 
   const handleInput = ({ target }) => {
     setInpustAdress({ ...inpustAdress, [target.name]: target.value });
   };
 
   const handleSelect = ({ target }) => {
+    console.log(target.value);
     setInpustAdress({ ...inpustAdress, sellerId: target.value });
   };
 
@@ -55,35 +57,47 @@ export default function Checkout() {
     order.userId = userStorage.id;
   };
 
-  const CalculatepriceTotal = () => {
-    let total = 0;
-    if (productsCheckouts) {
-      productsCheckouts.map((product) => {
-        total += (Number(product.price) * Number(product.quantity));
-        setCheckoutTotalValue(total);
-        order.totalPrice = total.toFixed(2);
-        return null;
-      });
-    }
-  };
+  // const CalculatepriceTotal = () => {
+  //   let total = 0;
+  //   if (productsCheckouts) {
+  //     productsCheckouts.map((product) => {
+  //       total += (Number(product.price) * Number(product.quantity));
+  //       setCheckoutTotalValue(total);
+  //       order.totalPrice = total.toFixed(2);
+  //       return null;
+  //     });
+  //   }
+  // };
 
   useEffect(() => {
-    CalculatepriceTotal();
+    const total = computeTotalCart(productsCheckouts);
+    setCheckoutTotalValue(Number(total));
+    order.totalPrice = Number(total).toFixed(2);
+    // CalculatepriceTotal();
     setingOrder();
   }, [checkout]);
 
+  useEffect(() => {
+    getAllSellers();
+  }, []);
+
   const submitButton = async () => {
-    CalculatepriceTotal();
+    // CalculatepriceTotal();
+    const total = computeTotalCart(productsCheckouts);
+    setCheckoutTotalValue(total);
+    order.totalPrice = Number(total).toFixed(2);
     setingOrder();
-    console.log(order);
-    const idRetunr = await postSale(order);
-    console.log(idRetunr);
-    if (idRetunr) {
-      navigate(`/customer/sales/${idRetunr}`);
-    } else {
-      console.log(erro);
-      return null;
-    }
+    // console.log(order);
+    console.log(setInpustAdress);
+    const idRetunr = await postSale(order, userStorage);
+    // console.log(`Primeiro retorn ${idRetunr}`);
+    // if (idRetunr) {
+    // console.log(idRetunr);
+    navigate(`/customer/orders/${idRetunr}`);
+    // } else {
+    // console.log(erro);
+    // return null;
+    // }
   };
 
   return (
@@ -118,60 +132,63 @@ export default function Checkout() {
                 <div className="checkout_TotalValue">
                   <p data-testid="customer_checkout__element-order-total-price">
                     Total: R$
-                    { checkoutTotalValue.toFixed(2).replace('.', ',') }
+                    { Number(checkoutTotalValue).toFixed(2).replace('.', ',') }
                   </p>
                 </div>
               </div>)}
         </div>
       </div>
       <h3>Detalhes e enderecos para entrega</h3>
-      <form className="box_Detail">
-        <div className="inputs_info">
-          <label htmlFor="vendedor">
-            P. Vendedor Responsvel
-            <select
-              value={ inpustAdress.sellerId }
-              data-testid="customer_checkout__select-seller"
-              onChange={ handleSelect }
-            >
-              <option> selecione vendedor</option>
-              { allSalser ? (
-                allSalser.map((sale, index) => (
-                  <option key={ index } value={ sale.id }>{sale.name}</option>
-                ))
-              ) : <option value={ 1 }>Carregando</option>}
-            </select>
-          </label>
-          <label htmlFor="endereco">
-            Endereco
-            <input
-              className="formAdress"
-              type="text"
-              name="deliveryAddress"
-              onChange={ handleInput }
-              data-testid="customer_checkout__input-address"
-            />
-          </label>
-          <label htmlFor="number">
-            Numero
-            <input
-              className="formNumber"
-              type="text"
-              name="deliveryNumber"
-              onChange={ handleInput }
-              data-testid="customer_checkout__input-address-number"
-            />
-          </label>
-        </div>
-        <button
-          onClick={ submitButton }
-          className="submitOrder"
-          type="button"
-          data-testid="customer_checkout__button-submit-order"
-        >
-          FINALIZAR PEDIDO
-        </button>
-      </form>
+      {allSellers.length > 0 && (
+        <form className="box_Detail">
+          <div className="inputs_info">
+            <label htmlFor="vendedor">
+              P. Vendedor Responsvel
+              <select
+                // value={ inpustAdress.sellerId }
+                defaultValue={ allSellers[0].id }
+                data-testid="customer_checkout__select-seller"
+                onChange={ handleSelect }
+              >
+                {allSellers.map((sale, index) => (
+                  <option key={ index } value={ sale.id }>
+                    {sale.name}
+                  </option>
+                ))}
+              </select>
+            </label>
+            <label htmlFor="endereco">
+              Endereco
+              <input
+                className="formAdress"
+                type="text"
+                name="deliveryAddress"
+                onChange={ handleInput }
+                data-testid="customer_checkout__input-address"
+              />
+            </label>
+            <label htmlFor="number">
+              Numero
+              <input
+                className="formNumber"
+                type="text"
+                name="deliveryNumber"
+                onChange={ handleInput }
+                data-testid="customer_checkout__input-address-number"
+              />
+            </label>
+          </div>
+          <button
+            onClick={ submitButton }
+            className="submitOrder"
+            type="button"
+            data-testid="customer_checkout__button-submit-order"
+          >
+            FINALIZAR PEDIDO
+          </button>
+        </form>
+      )}
+      ;
     </section>
   );
 }

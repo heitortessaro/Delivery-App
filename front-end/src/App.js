@@ -20,7 +20,7 @@ function App() {
           <Route exact path="/customer/products" element={ <CustomerProducts /> } />
           <Route exact path="/customer/orders" element={ <CustomerOrders /> } />
           <Route exact path="/seller/orders" element={ <SellerOrders /> } />
-          <Route exact path="/customer/sales" element={ ' ' } />
+          <Route exact path="/customer/orders/:id" element={ ' ' } />
         </Switch>
       </div>
     </BrowserRouter>

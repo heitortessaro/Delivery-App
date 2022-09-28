@@ -1,13 +1,13 @@
 import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import Context from './Context';
-import { getSalers } from '../services/SalerServices';
+// import { getSalers } from '../services/SalerServices';
 
 function Provider({ children }) {
   const [checkoutTotalValue, setCheckoutTotalValue] = useState(0);
   const [sales, setsales] = useState([]);
   const [checkout, setCheckout] = useState();
-  const [allSalser, setAllsaler] = useState();
+  const [allSellers, setAllSellers] = useState();
 
   const state = useMemo(() => ({
     checkoutTotalValue,
@@ -16,8 +16,8 @@ function Provider({ children }) {
     setCheckout,
     sales,
     setsales,
-    allSalser,
-    setAllsaler,
+    allSellers,
+    setAllSellers,
   }), [checkoutTotalValue, checkout]);
   return (
     <div>

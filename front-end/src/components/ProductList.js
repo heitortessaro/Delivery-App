@@ -3,19 +3,18 @@ import PropTypes from 'prop-types';
 import './styles/ProductList.css';
 import Context from '../context/Context';
 
-export default function ProductList({ produtc, itemNumber, removeButton }) {
-  const subTotal = Number(produtc.price) * Number(produtc.quantity);
+export default function ProductList({ product, itemNumber, removeButton }) {
+  const subTotal = Number(product.price) * Number(product.quantity);
   const { setCheckout } = useContext(Context);
   const productsCheckouts = JSON.parse(localStorage.getItem('checkoutProducts'));
 
   const RemoveProduct = () => {
-    console.log('executei');
-    const remove = productsCheckouts.find((produto) => produto.id === produtc.id);
+    const remove = productsCheckouts.find((produto) => produto.id === product.id);
     localStorage.setItem(
       'checkoutProducts',
-      JSON.stringify(productsCheckouts.filter((product) => product !== remove)),
+      JSON.stringify(productsCheckouts.filter((p) => p !== remove)),
     );
-    const updateStorage = productsCheckouts.find((produto) => produto.id === produtc.id);
+    const updateStorage = productsCheckouts.find((produto) => produto.id === product.id);
     setCheckout(updateStorage);
   };
   return (
@@ -35,7 +34,7 @@ export default function ProductList({ produtc, itemNumber, removeButton }) {
             `customer_checkout__element-order-table-name-${itemNumber}`
           }
         >
-          { produtc.name }
+          { product.name }
 
         </p>
       </div>
@@ -45,7 +44,7 @@ export default function ProductList({ produtc, itemNumber, removeButton }) {
             `customer_checkout__element-order-table-quantity-${itemNumber}`
           }
         >
-          { produtc.quantity }
+          { product.quantity }
 
         </p>
       </div>
@@ -55,7 +54,7 @@ export default function ProductList({ produtc, itemNumber, removeButton }) {
             `customer_checkout__element-order-table-unit-price-${itemNumber}`
           }
         >
-          { produtc.price.replace('.', ',') }
+          { product.price.replace('.', ',') }
         </p>
       </div>
       <div className="pd_subTotal">
@@ -88,10 +87,10 @@ export default function ProductList({ produtc, itemNumber, removeButton }) {
 }
 
 ProductList.propTypes = {
-  produtc: PropTypes.shape({
+  product: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
-    price: PropTypes.number,
+    price: PropTypes.string,
     quantity: PropTypes.number,
   }).isRequired,
   itemNumber: PropTypes.number.isRequired,
