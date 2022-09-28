@@ -1,34 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ProductList from '../components/ProductList';
 import Context from '../context/Context';
-import { getSalers } from '../services/SalesServices';
 import NavClient from '../components/NavClient';
+import { postSale } from '../services/salesServices';
 import './styles/checkout.css';
 
-// const simulateprodutos = [{
-//   id: 5,
-//   name: 'cerveja',
-//   price: 12.0,
-//   quantity: 2,
-// },
-// {
-//   id: 5,
-//   name: 'cerveja',
-//   quantity: 2,
-//   price: 12.0,
-// },
-// {
-//   id: 4,
-//   name: 'vodca',
-//   quantity: 1,
-//   price: 22.5,
-// }];
-
-// localStorage.setItem('checkoutProducts', JSON.stringify(simulateprodutos));
-
 export default function Checkout() {
+  const navigate = useNavigate();
   const { checkoutTotalValue, setCheckoutTotalValue } = useContext(Context);
-  const { sales, setsales } = useContext(Context);
+  const { allSalser } = useContext(Context);
   const { checkout } = useContext(Context);
   const [inpustAdress, setInpustAdress] = useState({
     deliveryAddress: '',
@@ -36,8 +17,6 @@ export default function Checkout() {
     sellerId: '',
   });
   const productsCheckouts = JSON.parse(localStorage.getItem('checkoutProducts'));
-  const allSales = getSalers();
-  setsales(allSales);
   const order = {
     userId: '',
     sellerId: '',
@@ -71,7 +50,7 @@ export default function Checkout() {
     let total = 0;
     if (productsCheckouts) {
       productsCheckouts.map((product) => {
-        total += (product.price * product.quantity);
+        total += (Number(product.price) * Number(product.quantity));
         setCheckoutTotalValue(total);
         order.totalPrice = total;
         return null;
@@ -84,6 +63,19 @@ export default function Checkout() {
     setingOrder();
     console.log(order);
   }, [checkout]);
+
+  const submitButton = async () => {
+    CalculatepriceTotal();
+    setingOrder();
+    console.log(order);
+    const idRetunr = await postSale(order);
+    if (idRetunr) {
+      navigate(`/customer/sales:${idRetunr}`);
+    } else {
+      console.log(erro);
+      return null;
+    }
+  };
 
   return (
     <section className="box_section">
@@ -117,7 +109,7 @@ export default function Checkout() {
                 <div className="checkout_TotalValue">
                   <p data-testid="customer_checkout__element-order-total-price">
                     Total: R$
-                    { checkoutTotalValue }
+                    { checkoutTotalValue.toFixed(2).replace('.', ',') }
                   </p>
                 </div>
               </div>)}
@@ -133,8 +125,8 @@ export default function Checkout() {
               data-testid="customer_checkout__select-seller"
               onChange={ handleSelect }
             >
-              { !sales ? (
-                sales.map((sale, index) => (
+              { !allSalser ? (
+                allSalser.map((sale, index) => (
                   <option key={ index } value={ sale.id }>{sale.name}</option>
                 ))
               ) : <option value={ 1 }>Carregando</option>}
@@ -162,6 +154,7 @@ export default function Checkout() {
           </label>
         </div>
         <button
+          onClick={ submitButton }
           className="submitOrder"
           type="button"
           data-testid="customer_checkout__button-submit-order"

@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const URL_SALES = 'http://localhost:3001/user';
+const URL_USER = 'http://localhost:3001/user';
 
 export const getSalers = async () => {
   try {
-    const { data } = await axios.get(URL_SALES);
+    const { data } = await axios.get(URL_USER);
     console.log(data);
     const filterSaler = data.filter((user) => user.role === 'seller');
     return filterSaler;

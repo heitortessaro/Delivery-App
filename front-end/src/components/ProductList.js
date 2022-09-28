@@ -4,7 +4,7 @@ import './styles/ProductList.css';
 import Context from '../context/Context';
 
 export default function ProductList({ produtc, itemNumber, removeButton }) {
-  const subTotal = produtc.price * produtc.quantity;
+  const subTotal = Number(produtc.price) * Number(produtc.quantity);
   const { setCheckout } = useContext(Context);
   const productsCheckouts = JSON.parse(localStorage.getItem('checkoutProducts'));
 
@@ -22,7 +22,7 @@ export default function ProductList({ produtc, itemNumber, removeButton }) {
     <div className="box_pd_info">
       <div className="pd_id">
         <p
-          data-testeid={
+          data-testid={
             `customer_checkout__element-order-table-item-number-${itemNumber}`
           }
         >
@@ -55,8 +55,7 @@ export default function ProductList({ produtc, itemNumber, removeButton }) {
             `customer_checkout__element-order-table-unit-price-${itemNumber}`
           }
         >
-          R$
-          { produtc.price }
+          { produtc.price.replace('.', ',') }
         </p>
       </div>
       <div className="pd_subTotal">
@@ -65,8 +64,7 @@ export default function ProductList({ produtc, itemNumber, removeButton }) {
             `customer_checkout__element-order-table-sub-total-${itemNumber}`
           }
         >
-          R$
-          { subTotal }
+          { subTotal.toFixed(2).replace('.', ',') }
         </p>
       </div>
       { removeButton
