@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import './styles/navClient.css';
 
 export default function CustomerProducts({ selected, customer, showProducts }) {
+  // const pedidos = showProducts ? 'Meus Pedidos' : 'Pedidos';
   const navigate = useNavigate();
   const logoutFun = () => {
     localStorage.clear();
@@ -29,7 +30,7 @@ export default function CustomerProducts({ selected, customer, showProducts }) {
           type="button"
           onClick={ () => navigate('') }
         >
-          MEUS PEDIDOS
+          {showProducts ? 'Meus Pedidos' : 'Pedidos'}
         </button>
       </div>
       <div>
