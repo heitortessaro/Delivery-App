@@ -15,7 +15,16 @@ export default function CustomerOrders() {
     date: '26/79/95',
     price: '23,80',
     adress: 'rua asdakldj',
-  }];
+  },
+  {
+    id: 1,
+    orderNum: '003',
+    status: 'Preparando',
+    date: '26/79/95',
+    price: '23,80',
+    adress: 'rua asdakldj',
+  },
+  ];
 
   const receiveOrders = async () => {
     const receivedOrders = await getOrders(user);
@@ -31,18 +40,19 @@ export default function CustomerOrders() {
   return (
     <section className="customer_orders">
       <NavClient selected="pedidos" customer={ user.name } showProducts />
-      {ordersTest.length > 0 && ordersTest.map((o) => (
-        <OrderCard
-          key={ `${o.id + o.orderNum + o.date}` }
-          id={ o.id }
-          orderNum={ o.orderNum }
-          status={ o.status }
-          date={ o.date }
-          price={ o.price }
-          adress={ o.adress }
-          showAdress
-        />
-      ))}
+      <div className="card_shelf">
+        {ordersTest.length > 0 && ordersTest.map((o) => (
+          <OrderCard
+            key={ `${o.id + o.orderNum + o.date}` }
+            id={ o.id }
+            orderNum={ o.orderNum }
+            status={ o.status }
+            date={ o.date }
+            price={ o.price }
+            adress={ o.adress }
+          />
+        ))}
+      </div>
     </section>
   );
 }
