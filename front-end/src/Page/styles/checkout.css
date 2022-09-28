@@ -47,16 +47,27 @@
   font-size: 25px;
   height: 70px;
   justify-content: center;
-  margin-left: 82vh;
-  width: 155px;
+  margin-left: 75vh;
+  width: 225px;
 }
+
+.checkoutProducts {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 340px;
+  margin-bottom: 10px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  width: 100vh;
+}
+
 
 .box_Pedidos {
   background-color: whitesmoke;
   border: 2px 2px 2px 6px solid black;
   border-radius: 15px;
-  height: 400px;
-  padding: 20px;
+  height: 500px;
   width: 100vh;
 }
 

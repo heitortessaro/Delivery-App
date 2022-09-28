@@ -1,14 +1,13 @@
 import axios from 'axios';
 
-const dataUser = JSON.parse(localStorage.getItem('keyLocalStorage'));
-const URL_SALES = 'http://localhost:3001/saler';
+const URL_SALES = 'http://localhost:3001/user';
 
 export const getSalers = async () => {
   try {
-    const { data } = await axios.get(URL_SALES, { headers: {
-      Authorization: dataUser.data.token,
-    } });
-    return data;
+    const { data } = await axios.get(URL_SALES);
+    console.log(data);
+    const filterSaler = data.filter((user) => user.role === 'seller');
+    return filterSaler;
   } catch (error) {
     return { error: error.response };
   }

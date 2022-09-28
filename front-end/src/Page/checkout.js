@@ -102,16 +102,18 @@ export default function Checkout() {
           { !productsCheckouts
             ? null
             : (
-              <div>
-                { productsCheckouts.map((product, index) => (
-                  <div key={ index }>
-                    <ProductList
-                      produtc={ product }
-                      itemNumber={ index }
-                      removeButton
-                    />
-                  </div>
-                )) }
+              <div className="box_total">
+                <div className="checkoutProducts">
+                  { productsCheckouts.map((product, index) => (
+                    <div key={ index }>
+                      <ProductList
+                        produtc={ product }
+                        itemNumber={ index }
+                        removeButton
+                      />
+                    </div>
+                  )) }
+                </div>
                 <div className="checkout_TotalValue">
                   <p data-testid="customer_checkout__element-order-total-price">
                     Total: R$
