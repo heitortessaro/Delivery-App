@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocalStorage } from '@mantine/hooks';
+// import { useLocalStorage } from '@mantine/hooks';
 import NavClient from '../components/NavClient';
 import ProductCard from '../components/ProductCard';
 import TotalTag from '../components/TotalTag';
@@ -7,9 +7,8 @@ import { getProducts, computeTotalCart } from '../services/productsServices';
 import './styles/customerProduct.css';
 
 export default function CustomerProducts() {
-  const [checkoutProducts, setCheckoutProducts] = useLocalStorage(
-    { key: 'checkoutProducts', defaultValue: [] },
-  );
+  const checkoutProducts = JSON
+    .parse(window.localStorage.getItem('checkoutProducts')) || [];
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState((0).toFixed(2));
   const userName = JSON.parse(window.localStorage.getItem('user')).name;
@@ -27,7 +26,7 @@ export default function CustomerProducts() {
   const receiveProducts = async () => {
     const receivedProducts = await getProducts();
     if (checkoutProducts.length > 0) {
-      updateQuantity(receiveProducts);
+      updateQuantity(receivedProducts);
     } else {
       setProducts(receivedProducts);
     }
@@ -43,7 +42,9 @@ export default function CustomerProducts() {
       newProducts[index].quantity = newQtty;
       setProducts(newProducts);
       setTotal(computeTotalCart(products));
-      setCheckoutProducts(newProducts.filter((p) => p.quantity > 0));
+      localStorage.setItem('checkoutProducts', JSON
+        .stringify(newProducts.filter((p) => p.quantity > 0)));
+      setCheckoutProducts();
     }
   };
 
