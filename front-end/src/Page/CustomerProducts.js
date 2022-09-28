@@ -27,6 +27,7 @@ export default function CustomerProducts() {
     const receivedProducts = await getProducts();
     if (checkoutProducts.length > 0) {
       updateQuantity(receivedProducts);
+      setTotal(computeTotalCart(checkoutProducts));
     } else {
       setProducts(receivedProducts);
     }
