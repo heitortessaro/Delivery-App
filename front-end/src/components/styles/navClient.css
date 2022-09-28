@@ -28,7 +28,7 @@
   font-size: 26px;
   height: 75px;
   margin: 0;
-  min-width: 300px;
+  min-width: 200px;
   text-align: center;
 }
 
@@ -40,7 +40,7 @@
   font-size: 26px;
   height: 75px;
   margin: 0;
-  min-width: 300px;
+  min-width: 200px;
   text-align: center;
 }
 
@@ -52,7 +52,7 @@
   font-size: 26px;
   height: 75px;
   margin: 0;
-  min-width: 300px;
+  min-width: 200px;
   text-align: center;
 }
 
@@ -64,7 +64,7 @@
   font-size: 26px;
   height: 75px;
   margin: 0;
-  min-width: 300px;
+  min-width: 200px;
   text-align: center;
 }
 
@@ -72,5 +72,5 @@
   border: 2px solid white;
   cursor: pointer;
   height: 71px;
-  min-width: 296px;
+  min-width: 196px;
 }
