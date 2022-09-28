@@ -1,11 +1,17 @@
 import './styles/orderCard.css';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 export default function OrderCard(
   { id, orderNum, status, date, price, adress, showAdress },
 ) {
+  const navigate = useNavigate();
   return (
-    <div className="order_card">
+    <button
+      type="button"
+      className="order_card"
+      onClick={ () => navigate(`/customer/orders/${id}`) }
+    >
       <div className="order_number">
         <p>
           {'Pedido '}
@@ -38,7 +44,7 @@ export default function OrderCard(
             <p data-testid={ `seller_orders__element-card-address-${id}` }>{adress}</p>
           </div>)}
       </div>
-    </div>
+    </button>
   );
 }
 
