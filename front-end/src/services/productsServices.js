@@ -6,7 +6,7 @@ const computeTotalCart = (productArray) => {
   const total = productArray
     .reduce((acc, curr) => acc + Number(curr.quantity) * Number(curr.price), 0)
     .toFixed(2);
-  return total;
+  return total > 0 ? total : 0;
 };
 
 const addQuantityKey = (productArray) => {

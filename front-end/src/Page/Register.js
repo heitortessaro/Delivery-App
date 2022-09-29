@@ -55,6 +55,7 @@ export default function Register() {
       setMessageerror('falha na comunicacao');
       return null;
     }
+    localStorage.setItem('checkoutProducts', JSON.stringify([]));
     localStorage.setItem('user', JSON.stringify(newUser));
 
     if (newUser.role === 'customer') navigate('/customer/products');
