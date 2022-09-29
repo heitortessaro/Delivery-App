@@ -31,7 +31,6 @@ export default function Checkout() {
 
   const getAllSellers = async () => {
     const result = await getSalers();
-    // console.log(result[0].id);
     setAllSellers(result);
     setInpustAdress({ ...inpustAdress, sellerId: result[0].id });
   };
@@ -73,7 +72,6 @@ export default function Checkout() {
     const total = computeTotalCart(productsCheckouts);
     setCheckoutTotalValue(Number(total));
     order.totalPrice = Number(total).toFixed(2);
-    // CalculatepriceTotal();
     setingOrder();
   }, [checkout]);
 
@@ -82,22 +80,14 @@ export default function Checkout() {
   }, []);
 
   const submitButton = async () => {
-    // CalculatepriceTotal();
     const total = computeTotalCart(productsCheckouts);
     setCheckoutTotalValue(total);
     order.totalPrice = Number(total).toFixed(2);
     setingOrder();
-    // console.log(order);
     console.log(setInpustAdress);
     const idRetunr = await postSale(order, userStorage);
-    // console.log(`Primeiro retorn ${idRetunr}`);
-    // if (idRetunr) {
-    // console.log(idRetunr);
+    localStorage.setItem('checkoutProducts', JSON.stringify([]));
     navigate(`/customer/orders/${idRetunr}`);
-    // } else {
-    // console.log(erro);
-    // return null;
-    // }
   };
   return (
     <section className="box_section">
