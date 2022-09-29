@@ -99,7 +99,7 @@ export default function Checkout() {
     // return null;
     // }
   };
-
+  console.log(productsCheckouts);
   return (
     <section className="box_section">
       <NavClient selected="produtos" customer={ userStorage.name } showProducts />
@@ -122,7 +122,7 @@ export default function Checkout() {
                   { productsCheckouts.map((product, index) => (
                     <div key={ index }>
                       <ProductList
-                        produtc={ product }
+                        product={ product }
                         itemNumber={ index }
                         removeButton
                       />
