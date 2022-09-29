@@ -8,23 +8,23 @@ export default function CustomerOrders() {
   const user = JSON.parse(window.localStorage.getItem('user')) || {};
   const [orders, setOrders] = useState([]);
 
-  const ordersTest = [{
-    id: 1,
-    orderNum: '003',
-    status: 'Pendente',
-    date: '26/79/95',
-    price: '23,80',
-    adress: 'rua asdakldj',
-  },
-  {
-    id: 1,
-    orderNum: '003',
-    status: 'Preparando',
-    date: '26/79/95',
-    price: '23,80',
-    adress: 'rua asdakldj',
-  },
-  ];
+  // const ordersTest = [{
+  //   id: 1,
+  //   orderNum: '003',
+  //   status: 'Pendente',
+  //   date: '26/79/95',
+  //   price: '23,80',
+  //   adress: 'rua asdakldj',
+  // },
+  // {
+  //   id: 1,
+  //   orderNum: '003',
+  //   status: 'Preparando',
+  //   date: '26/79/95',
+  //   price: '23,80',
+  //   adress: 'rua asdakldj',
+  // },
+  // ];
 
   const receiveOrders = async () => {
     const receivedOrders = await getOrders(user);
@@ -41,7 +41,7 @@ export default function CustomerOrders() {
     <section className="customer_orders">
       <NavClient selected="pedidos" customer={ user.name } showProducts />
       <div className="card_shelf">
-        {ordersTest.length > 0 && ordersTest.map((o) => (
+        {orders.length > 0 && ordersTest.map((o) => (
           <OrderCard
             key={ `${o.id + o.orderNum + o.date}` }
             id={ o.id }
