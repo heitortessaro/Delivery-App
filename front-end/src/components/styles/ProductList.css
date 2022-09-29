@@ -1,6 +1,7 @@
 .box_pd_info {
   display: flex;
   padding-bottom: 10px;
+  width: 100vh;
 }
 
 .pd_id {

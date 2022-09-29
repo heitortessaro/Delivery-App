@@ -9,13 +9,10 @@ export default function ProductList({ product, itemNumber, removeButton }) {
   const productsCheckouts = JSON.parse(localStorage.getItem('checkoutProducts'));
 
   const RemoveProduct = () => {
-    const remove = productsCheckouts.find((produto) => produto.id === product.id);
-    localStorage.setItem(
-      'checkoutProducts',
-      JSON.stringify(productsCheckouts.filter((p) => p !== remove)),
-    );
-    const updateStorage = productsCheckouts.find((produto) => produto.id === product.id);
-    setCheckout(updateStorage);
+    // const remove = productsCheckouts.find((produto) => produto.id === product.id);
+    const temp = productsCheckouts.filter((p) => p.id !== product.id);
+    localStorage.setItem('checkoutProducts', JSON.stringify(temp));
+    setCheckout(temp);
   };
   return (
     <div className="box_pd_info">
