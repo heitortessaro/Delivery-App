@@ -1,10 +1,13 @@
 import './styles/orderCard.css';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
+import { returnDate } from '../services/ordersService';
 
 export default function OrderCard(
   { id, orderNum, status, date, price, adress, showAdress },
 ) {
+  const printingDate = returnDate(date);
+
   const navigate = useNavigate();
   return (
     <button
@@ -29,13 +32,13 @@ export default function OrderCard(
               data-testid={ `seller_orders__element-order-date-${id}` }
               className="order_date"
             >
-              {date}
+              {printingDate}
             </p>
             <p
               data-testid={ `seller_orders__element-card-price-${id}` }
               className="order_price"
             >
-              {price}
+              {price.toString().replace('.', ',')}
             </p>
           </div>
         </div>

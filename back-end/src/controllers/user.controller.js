@@ -15,8 +15,8 @@ class UserController {
 
   async addUser(req, res) {
     const { name, email, password } = req.body;
-    const { newUser, message } = await this.userService.addUser(name, email, password);
-    res.status(201).json({ message, newUser });
+    const { newUser } = await this.userService.addUser(name, email, password);
+    res.status(201).json({ newUser });
   }
 
   async getUsers(_req, res) {
