@@ -99,7 +99,6 @@ export default function Checkout() {
     // return null;
     // }
   };
-  console.log(productsCheckouts);
   return (
     <section className="box_section">
       <NavClient selected="produtos" customer={ userStorage.name } showProducts />
@@ -130,9 +129,11 @@ export default function Checkout() {
                   )) }
                 </div>
                 <div className="checkout_TotalValue">
-                  <p data-testid="customer_checkout__element-order-total-price">
+                  <p>
                     Total: R$
-                    { Number(checkoutTotalValue).toFixed(2).replace('.', ',') }
+                    <spam data-testid="customer_checkout__element-order-total-price">
+                      { Number(checkoutTotalValue).toFixed(2).replace('.', ',') }
+                    </spam>
                   </p>
                 </div>
               </div>)}

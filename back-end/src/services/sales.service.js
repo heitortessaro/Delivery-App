@@ -1,8 +1,8 @@
-const { sale, product, saleProduct } = require('../database/models');
+const { sale, product, sales_products } = require('../database/models');
 const { CustomError } = require('../helpers/customError');
 
 class SalesService {
-    constructor(salesModel = sale, saleProductModel = saleProduct) {
+    constructor(salesModel = sale, saleProductModel = sales_products) {
         this.salesModel = salesModel;
         this.saleProductModel = saleProductModel;
     }
