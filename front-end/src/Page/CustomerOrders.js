@@ -8,35 +8,14 @@ export default function CustomerOrders() {
   const user = JSON.parse(window.localStorage.getItem('user')) || {};
   const [orders, setOrders] = useState([]);
 
-  // const ordersTest = [{
-  //   id: 1,
-  //   orderNum: '003',
-  //   status: 'Pendente',
-  //   date: '26/79/95',
-  //   price: '23,80',
-  //   adress: 'rua asdakldj',
-  // },
-  // {
-  //   id: 1,
-  //   orderNum: '003',
-  //   status: 'Preparando',
-  //   date: '26/79/95',
-  //   price: '23,80',
-  //   adress: 'rua asdakldj',
-  // },
-  // ];
-
   const receiveOrders = async () => {
     const receivedOrders = await getOrders(user);
-    // console.log(receiveOrders);
     setOrders(receivedOrders);
   };
 
   useEffect(() => {
     receiveOrders();
   }, []);
-
-  // console.log(orders);
 
   return (
     <section className="customer_orders">
@@ -52,6 +31,7 @@ export default function CustomerOrders() {
             price={ o.totalPrice }
             adress={ o.deliveryAddress }
             showAdress={ false }
+            user="customer"
           />
         ))}
       </div>
