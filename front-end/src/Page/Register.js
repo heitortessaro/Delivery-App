@@ -13,8 +13,9 @@ export default function Register() {
     name: '',
     email: '',
     password: '',
+    role: 'customer',
   });
-  const { name, email, password } = formState;
+  const { name, email, password, role } = formState;
   const navigate = useNavigate();
 
   const handleInput = ({ target }) => {
@@ -46,7 +47,7 @@ export default function Register() {
   }, [email, password, name]);
 
   const handleButtonLogin = async () => {
-    const { newUser, error } = await createUser({ name, email, password });
+    const { newUser, error } = await createUser({ name, email, password, role });
     if (error && error.status === errovalidation) {
       setMessageerror('Usuario ja cadastrado');
       return null;
@@ -57,7 +58,6 @@ export default function Register() {
     }
     localStorage.setItem('checkoutProducts', JSON.stringify([]));
     localStorage.setItem('user', JSON.stringify(newUser));
-
     if (newUser.role === 'customer') navigate('/customer/products');
   };
 

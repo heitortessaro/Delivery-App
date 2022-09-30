@@ -28,14 +28,14 @@ class UserService {
     };
   }
   
-  async addUser(name, email, password) {
+  async addUser(name, email, password, role) {
     const hashedPassword = md5(password);
     const registeredUser = await this.userModel
       .findOne({ where: { email } });
     if (registeredUser) throw new CustomError(409, 'User already registered');
     const userToken = token.generate({ email, hashedPassword });
     await this.userModel
-      .create({ name, email, password: hashedPassword, role: 'customer' });
+      .create({ name, email, password: hashedPassword, role });
     const newUser = await this.userModel
       .findOne({ where: { name, email, password: hashedPassword } });
     // newUser.token = userToken;
