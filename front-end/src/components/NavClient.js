@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import './styles/navClient.css';
 
 export default function CustomerProducts({ selected, customer, showProducts }) {
+  // const pedidos = showProducts ? 'Meus Pedidos' : 'Pedidos';
   const navigate = useNavigate();
   const logoutFun = () => {
     localStorage.clear();
@@ -27,9 +28,9 @@ export default function CustomerProducts({ selected, customer, showProducts }) {
           className={ ` ${selected === 'pedidos' ? 'selected' : 'no_selected'}` }
           data-testid="customer_products__element-navbar-link-orders"
           type="button"
-          onClick={ () => navigate('') }
+          onClick={ () => navigate('/customer/checkout') }
         >
-          MEUS PEDIDOS
+          {showProducts ? 'Meus Pedidos' : 'Pedidos'}
         </button>
       </div>
       <div>

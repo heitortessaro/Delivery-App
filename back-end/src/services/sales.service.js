@@ -1,8 +1,8 @@
-const { sale, product, saleProduct } = require('../database/models');
+const { sale, product, sales_products, user } = require('../database/models');
 const { CustomError } = require('../helpers/customError');
 
 class SalesService {
-    constructor(salesModel = sale, saleProductModel = saleProduct) {
+    constructor(salesModel = sale, saleProductModel = sales_products) {
         this.salesModel = salesModel;
         this.saleProductModel = saleProductModel;
     }
@@ -26,7 +26,11 @@ class SalesService {
 
     async getSaleById(id) {
         const userSale = await this.salesModel.findByPk(id, { include: 
-            { model: product, as: 'products', through: { attributes: ['quantity'] } } });
+            [
+             { model: product, as: 'products', through: { attributes: ['quantity'] } },
+             { model: user, as: 'seller'}
+            ] 
+        });
         return userSale;
     }
 

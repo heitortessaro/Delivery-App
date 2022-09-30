@@ -1,0 +1,120 @@
+.box_section {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.table_products {
+  align-items: baseline;
+  display: flex;
+  justify-content: center;
+  width: 100vh;
+}
+
+
+.descrp {
+  text-align: center;
+  width: 400px;
+}
+
+.quant {
+  margin-left: 15px;
+  text-align: center;
+  width: 80px;
+}
+
+.value {
+  text-align: center;
+  width: 130px;
+}
+
+.subTotal {
+  text-align: center;
+  width: 120px;
+}
+
+.Remover {
+  text-align: center;
+  width: 150px;
+}
+
+.checkout_TotalValue {
+  background: #036b52;
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  font-size: 25px;
+  height: 70px;
+  justify-content: center;
+  margin-left: 75vh;
+  width: 225px;
+}
+
+.checkoutProducts {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 460px;
+  margin-bottom: 10px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  width: 100vh;
+}
+
+
+.box_Pedidos {
+  background-color: whitesmoke;
+  border: 2px 2px 2px 6px solid black;
+  border-radius: 15px;
+  height: 600px;
+  width: 100vh;
+}
+
+.box_Detail {
+  background-color: whitesmoke;
+  border: 2px 2px 2px 6px solid black;
+  border-radius: 15px;
+  height: 120px;
+  padding: 20px;
+  width: 100vh;
+}
+
+.box_Detail label {
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+.inputs_info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.box_Detail select {
+  height: 30px;
+  margin-top: 15px;
+  width: 250px;
+}
+
+.box_Detail input {
+  padding-right: 20px;
+}
+
+.formNumber {
+  width: 30px;
+}
+
+.formAdress {
+  width: 500px;
+}
+
+.submitOrder {
+  background-color: #036b52;
+  border-radius: 8px;
+  color: white;
+  font-size: 20px;
+  height: 50px;
+  margin-left: 40%;
+  margin-top: 10px;
+  width: 230px;
+}

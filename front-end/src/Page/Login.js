@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../images/logo.jpg';
 import { login } from '../services/loginServices';
 import './styles/login.css';
+import { verifyLastUser } from '../services/userService';
 
 const minpass = 6;
 const errovalidation = 404;
@@ -51,6 +52,8 @@ function Login() {
       setErrorMessage('usuario Invalido');
       return null;
     }
+    // clear checkoutProducts in case of new user
+    verifyLastUser(result);
     localStorage.setItem('user', JSON.stringify(result));
 
     if (result.role === 'customer') navigate('/customer/products');

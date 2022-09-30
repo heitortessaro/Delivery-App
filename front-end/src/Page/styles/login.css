@@ -52,23 +52,23 @@ input {
   width: 250px;
 }
 
-button {
-  border-radius: 5px;
-  height: 40px;
-  margin: 5px;
-}
-
 .button_login {
   background-color: rgb(141, 237, 45);
+  border-radius: 5px;
   color: white;
   font-size: 20px;
+  height: 40px;
+  margin: 5px;
   width: 260px;
 }
 
 .button_Register {
   border: 3px solid green;
+  border-radius: 5px;
   color: darkgreen;
   font-size: 20px;
+  height: 40px;
+  margin: 5px;
   width: 260px;
 }
 

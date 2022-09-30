@@ -1,0 +1,55 @@
+.box_pd_info {
+  display: flex;
+  padding-bottom: 10px;
+}
+
+.pd_id {
+  background: #2fc18c;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
+  display: flex;
+  justify-content: center;
+  width: 30px;
+}
+
+.pd_desc {
+  background-color: #eaf1ef;
+  padding-left: 10px;
+  width: 400px;
+}
+
+.pd_quant {
+  background-color: #036b52;
+  color: white;
+  display: flex;
+  justify-content: center;
+  width: 90px;
+}
+
+.pd_value {
+  background-color: #421981;
+  color: white;
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}
+
+.pd_subTotal {
+  background-color: #056cf9;
+  color: white;
+  display: flex;
+  justify-content: center;
+  width: 120px;
+}
+
+.pd_button button {
+  background-color: #2fc18c;
+  border: none;
+  border-bottom-right-radius: 8px;
+  border-top-right-radius: 8px;
+  color: white;
+  height: 50px;
+  margin-bottom: -30px;
+  margin-top: -30px;
+  width: 150px;
+}
