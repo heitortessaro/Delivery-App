@@ -8,14 +8,15 @@ export default function AdminManage() {
   const minpass = 5;
   const minName = 12;
   const errovalidation = 409;
-  const [btnIsdisable, setBttnIsDisabled] = useState(true);
-  const [menssageError, setMessageerror] = useState('');
-  const [formCadUser, setFormCaduser] = useState({
+  const defaultFormData = {
     name: '',
     email: '',
     password: '',
-    role: 'seller',
-  });
+    role: 'customer',
+  };
+  const [btnIsdisable, setBttnIsDisabled] = useState(true);
+  const [menssageError, setMessageerror] = useState('');
+  const [formCadUser, setFormCaduser] = useState(defaultFormData);
   const { name, email, password } = formCadUser;
   const userStorage = JSON.parse(localStorage.getItem('user'));
 
@@ -23,7 +24,6 @@ export default function AdminManage() {
     setFormCaduser({ ...formCadUser, [target.name]: target.value });
   };
 
-  console.log(formCadUser);
   const handleSelect = ({ target }) => {
     setFormCaduser({ ...formCadUser, role: target.value });
   };
@@ -38,6 +38,7 @@ export default function AdminManage() {
       setMessageerror('falha na comunicacao');
       return null;
     }
+    setFormCaduser(defaultFormData);
   };
 
   useEffect(() => {
@@ -107,12 +108,11 @@ export default function AdminManage() {
           Tipo
           <select
             name="role"
-            defaultValue="Seller"
             data-testid="admin_manage__select-role"
-            onClick={ handleSelect }
+            onChange={ handleSelect }
           >
+            <option value="customer">Cliente</option>
             <option value="seller">Vendedor</option>
-            <option value="custumer">Cliente</option>
             <option value="administrator">Administrador</option>
           </select>
         </label>
