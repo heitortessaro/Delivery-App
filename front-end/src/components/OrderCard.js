@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import { returnDate } from '../services/ordersService';
 
 export default function OrderCard(
-  { id, orderNum, status, date, price, adress, showAdress },
+  { id, orderNum, status, date, price, adress, showAdress, user },
 ) {
+  const testId = user === 'customer' ? 'customer' : 'seller';
   const printingDate = returnDate(date);
 
   const navigate = useNavigate();
@@ -19,23 +20,27 @@ export default function OrderCard(
         <p>
           {'Pedido '}
           <br />
-          <span data-testid={ `seller_orders__element-order-${id}` }>{orderNum}</span>
+          <span data-testid={ `${testId}_orders__element-order-id-${id}` }>
+            {orderNum}
+          </span>
         </p>
       </div>
       <div className="order_main">
         <div className="order_up">
           <div className={ `order_status_${status.toLowerCase()}` }>
-            <p data-testid={ `seller_orders__element-delivery-status-${id}` }>{status}</p>
+            <p data-testid={ `${testId}_orders__element-delivery-status-${id}` }>
+              {status}
+            </p>
           </div>
           <div className="order_date_price">
             <p
-              data-testid={ `seller_orders__element-order-date-${id}` }
+              data-testid={ `${testId}_orders__element-order-date-${id}` }
               className="order_date"
             >
               {printingDate}
             </p>
             <p
-              data-testid={ `seller_orders__element-card-price-${id}` }
+              data-testid={ `${testId}_orders__element-card-price-${id}` }
               className="order_price"
             >
               {price.toString().replace('.', ',')}
@@ -44,7 +49,7 @@ export default function OrderCard(
         </div>
         {showAdress && (
           <div className="order_down">
-            <p data-testid={ `seller_orders__element-card-address-${id}` }>{adress}</p>
+            <p data-testid={ `${testId}_orders__element-card-address-${id}` }>{adress}</p>
           </div>)}
       </div>
     </button>
@@ -59,4 +64,5 @@ OrderCard.propTypes = {
   price: PropTypes.string.isRequired,
   adress: PropTypes.string.isRequired,
   showAdress: PropTypes.bool.isRequired,
+  user: PropTypes.string.isRequired,
 };
