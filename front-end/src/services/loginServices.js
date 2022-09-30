@@ -12,9 +12,15 @@ export const login = async ({ email, password }) => {
   }
 };
 
-export const createUser = async ({ name, password, email }) => {
+export const createUser = async ({ name, password, email, role }, token) => {
   try {
-    const { data } = await axios.post(URL_USER, { name, password, email });
+    const { data } = await axios.post(
+      URL_USER,
+      { name, password, email, role },
+      { headers: {
+        authorization: token,
+      } },
+    );
     console.log(data);
     return data;
   } catch (error) {
