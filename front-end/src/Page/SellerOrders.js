@@ -19,7 +19,7 @@ export default function SellerOrders() {
 
   return (
     <section className="customer_orders">
-      <NavClient selected="pedidos" customer={ user.name } showProducts />
+      <NavClient selected="pedidos" customer={ user.name } showProducts={ false } />
       <div className="card_shelf">
         {orders.length > 0 && orders.map((o) => (
           <OrderCard
