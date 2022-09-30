@@ -40,9 +40,9 @@ class UserService {
       .findOne({ where: { name, email, password: hashedPassword } });
     // newUser.token = userToken;
     // const userData = { ...newUser, token: userToken };
-    const { id, name: nameSaved , email: emailSaved} = newUser;
+    const { id, name: nameSaved, email: emailSaved } = newUser;
     // console.log(id, nameSaved, email);
-    const userData = {id, name:nameSaved, email:emailSaved, role, token: userToken};
+    const userData = { id, name: nameSaved, email: emailSaved, role, token: userToken };
     // console.log(userData);
     return { newUser: userData };
   }
