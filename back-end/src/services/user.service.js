@@ -39,9 +39,12 @@ class UserService {
     const newUser = await this.userModel
       .findOne({ where: { name, email, password: hashedPassword } });
     // newUser.token = userToken;
-    const userData = { ...newUser, token: userToken };
-    console.log(userData);
-    return { message: 'Created', newUser: userData };
+    // const userData = { ...newUser, token: userToken };
+    const { id, name: nameSaved , email: emailSaved} = newUser;
+    // console.log(id, nameSaved, email);
+    const userData = {id, name:nameSaved, email:emailSaved, role, token: userToken};
+    // console.log(userData);
+    return { newUser: userData };
   }
 
   async getUsers() {

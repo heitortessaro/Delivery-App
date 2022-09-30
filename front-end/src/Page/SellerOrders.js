@@ -8,24 +8,6 @@ export default function SellerOrders() {
   const user = JSON.parse(window.localStorage.getItem('user')) || {};
   const [orders, setOrders] = useState([]);
 
-  const ordersTest = [{
-    id: 1,
-    orderNum: '003',
-    status: 'Pendente',
-    date: '26/79/95',
-    price: '23,80',
-    adress: 'rua asdakldj',
-  },
-  {
-    id: 1,
-    orderNum: '003',
-    status: 'Preparando',
-    date: '26/79/95',
-    price: '23,80',
-    adress: 'rua asdakldj',
-  },
-  ];
-
   const receiveOrders = async () => {
     const receivedOrders = await getOrders(user);
     setOrders(receivedOrders);
@@ -35,21 +17,21 @@ export default function SellerOrders() {
     receiveOrders();
   }, []);
 
-  console.log(orders);
-
   return (
     <section className="customer_orders">
-      <NavClient selected="pedidos" customer={ user.name } />
+      <NavClient selected="pedidos" customer={ user.name } showProducts />
       <div className="card_shelf">
-        {ordersTest.length > 0 && ordersTest.map((o) => (
+        {orders.length > 0 && orders.map((o) => (
           <OrderCard
-            key={ `${o.id + o.orderNum + o.date}` }
+            key={ `${o.id + o.deliveryNumber + o.saleDate}` }
             id={ o.id }
-            orderNum={ o.orderNum }
+            orderNum={ o.deliveryNumber }
             status={ o.status }
-            date={ o.date }
-            price={ o.price }
-            adress={ o.adress }
+            date={ o.saleDate }
+            price={ o.totalPrice }
+            adress={ o.deliveryAddress }
+            showAdress={ false }
+            user="seller"
           />
         ))}
       </div>

@@ -11,6 +11,12 @@ export default function CustomerProducts({ selected, customer, showProducts, man
     localStorage.clear();
     navigate('/login');
   };
+  const navigatePedidos = () => {
+    // console.log(showProducts);
+    if (showProducts) {
+      navigate('/customer/orders');
+    } else { navigate('/seller/orders'); }
+  };
 
   if (!manage) {
     if (showProducts) {
@@ -35,7 +41,7 @@ export default function CustomerProducts({ selected, customer, showProducts, man
           className={ ` ${selected === 'pedidos' ? 'selected' : 'no_selected'}` }
           data-testid="customer_products__element-navbar-link-orders"
           type="button"
-          onClick={ () => navigate('/customer/checkout') }
+          onClick={ () => navigatePedidos() }
         >
           { infobutton }
         </button>
