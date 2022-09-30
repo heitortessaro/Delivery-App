@@ -12,11 +12,17 @@ const login = async ({ email, password }) => {
   }
 };
 
-const createUser = async ({ name, password, email }) => {
+const createUser = async ({ name, password, email, role }, token) => {
   try {
-    const result = await axios.post(URL_USER, { name, password, email });
-    // console.log(result);
-    return result.data;
+    const { data } = await axios.post(
+      URL_USER,
+      { name, password, email, role },
+      { headers: {
+        authorization: token,
+      } },
+    );
+    console.log(data);
+    return data;
   } catch (error) {
     return { error: error.response };
   }

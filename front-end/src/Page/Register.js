@@ -14,8 +14,9 @@ export default function Register() {
     name: '',
     email: '',
     password: '',
+    role: 'customer',
   });
-  const { name, email, password } = formState;
+  const { name, email, password, role } = formState;
   const navigate = useNavigate();
 
   const handleInput = ({ target }) => {
@@ -47,7 +48,7 @@ export default function Register() {
   }, [email, password, name]);
 
   const handleButtonLogin = async () => {
-    const result = await createUser({ name, email, password });
+    const result = await createUser({ name, email, password, role });
     console.log(result.newUser);
     // const { newUser, error } = result;
     if (result.error && result.error.status === errovalidation) {

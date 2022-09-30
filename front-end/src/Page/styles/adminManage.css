@@ -1,0 +1,46 @@
+* {
+  top: 0;
+}
+
+.box_admSection {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.box_admSection h2 {
+  color: white;
+}
+
+.box_admSection p {
+  color: red;
+}
+
+.form_cadUser {
+  background-color: azure;
+  border: 2px solid black;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px;
+  padding: 10px;
+}
+
+.form_cadUser label {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  padding-bottom: 20px;
+}
+
+.form_cadUser select {
+  font-size: 18px;
+  height: 40px;
+  margin-top: 10px;
+}
+
+.form_cadUser button {
+  margin-left: 10px;
+  margin-top: 20px;
+}
