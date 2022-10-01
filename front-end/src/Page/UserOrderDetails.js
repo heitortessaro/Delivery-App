@@ -8,7 +8,7 @@ import './styles/customerProduct.css';
 
 const axios = require('axios');
 
-export default function CustomerSaleDetails({ userRole }) {
+export default function UserOrderDetails({ userRole }) {
   const user = JSON.parse(window.localStorage.getItem('user')) || {};
   const [sale, setSale] = useState(false);
   const [products, setProducts] = useState(false);
@@ -35,19 +35,22 @@ export default function CustomerSaleDetails({ userRole }) {
       <section>
         {sale && products && (
           <section>
-            <SaleDetail userRole={ userRole } sale={ sale } />
+            <SaleDetail role={ userRole } sale={ sale } />
             {products.map((product, i) => (
               <ProductList
                 key={ `${product.name + product.id}` }
                 product={ product }
                 itemNumber={ i }
                 removeButton={ false }
+                userRole={ userRole }
               />
             ))}
             <div className="checkout_TotalValue">
               <p>
                 Total: R$
-                <spam data-testid="customer_order_details__element-order-total-price">
+                <spam
+                  data-testid={ `${userRole}_order_details__element-order-total-price` }
+                >
                   { Number(sale.totalPrice).toFixed(2).replace('.', ',') }
                 </spam>
               </p>
@@ -59,6 +62,6 @@ export default function CustomerSaleDetails({ userRole }) {
   );
 }
 
-CustomerSaleDetails.propTypes = {
+UserOrderDetails.propTypes = {
   userRole: PropTypes.string.isRequired,
 };

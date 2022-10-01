@@ -2,36 +2,41 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { returnDate } from '../services/ordersService';
 
-export default function SaleDetail({ userRole, sale }) {
+export default function SaleDetail({ role, sale }) {
   return (
     <div>
       <h2>Detalhes do pedido</h2>
-      <span data-testid="customer_order_details__element-order-details-label-order-id">
+      <span
+        data-testid={ `${role}_order_details__element-order-details-label-order-id` }
+      >
         PEDIDO
         {' '}
         {`000${sale.id}`}
       </span>
-      {userRole === 'costumer' && (
+      {role === 'customer' && (
         <span
-          data-testid="customer_order_details__element-order-details-label-seller-name"
+          data-testid={ `${role}_order_details__element-order-details-label-seller-name` }
         >
           {' '}
           P. Vend:
           {sale.seller.name}
         </span>
       )}
-      <span data-testid="customer_order_details__element-order-details-label-order-date">
+      <span
+        data-testid={ `${role}_order_details__element-order-details-label-order-date` }
+      >
         {returnDate(sale.saleDate)}
       </span>
       <span
-        data-testid="customer_order_details__element-order-details-label-delivery-status"
+        data-testid={ `${role}_order_details__element-order-details-`
+        + 'label-delivery-status' }
       >
         {sale.status}
       </span>
-      {userRole === 'costumer' ? (
+      {role === 'customer' ? (
         <button
           type="submit"
-          data-testid="customer_order_details__button-delivery-check"
+          data-testid={ `${role}_order_details__button-delivery-check` }
           disabled
         >
           {' '}
@@ -41,8 +46,25 @@ export default function SaleDetail({ userRole, sale }) {
         </button>)
         : (
           <div>
-            <button type="submit"> PREPARAR PEDIDO </button>
-            <button type="submit"> SAIU PARA ENTREGA </button>
+            <button
+              type="submit"
+              data-testid="seller_order_details__button-preparing-check"
+            >
+              {' '}
+              PREPARAR PEDIDO
+              {' '}
+
+            </button>
+            <button
+              type="submit"
+              data-testid="seller_order_details__button-dispatch-check"
+              disabled
+            >
+              {' '}
+              SAIU PARA ENTREGA
+              {' '}
+
+            </button>
           </div>
         )}
     </div>
@@ -76,5 +98,5 @@ SaleDetail.propTypes = {
       role: PropTypes.string,
     }),
   }).isRequired,
-  userRole: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired,
 };

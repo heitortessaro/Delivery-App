@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './styles/ProductList.css';
 import Context from '../context/Context';
 
-export default function ProductList({ product, itemNumber, removeButton }) {
+export default function ProductList({ product, itemNumber, removeButton, userRole }) {
   let quantity = 0;
   if (product.sales_products) {
     quantity = product.sales_products.quantity;
@@ -26,7 +26,7 @@ export default function ProductList({ product, itemNumber, removeButton }) {
       <div className="pd_id">
         <p
           data-testid={
-            `customer_checkout__element-order-table-item-number-${itemNumber}`
+            `${userRole}_checkout__element-order-table-item-number-${itemNumber}`
           }
         >
           { itemNumber + 1 }
@@ -35,7 +35,7 @@ export default function ProductList({ product, itemNumber, removeButton }) {
       <div className="pd_desc">
         <p
           data-testid={
-            `customer_checkout__element-order-table-name-${itemNumber}`
+            `${userRole}_checkout__element-order-table-name-${itemNumber}`
           }
         >
           { product.name }
@@ -45,7 +45,7 @@ export default function ProductList({ product, itemNumber, removeButton }) {
       <div className="pd_quant">
         <p
           data-testid={
-            `customer_checkout__element-order-table-quantity-${itemNumber}`
+            `${userRole}_checkout__element-order-table-quantity-${itemNumber}`
           }
         >
           { product.quantity ? product.quantity : product.sales_products.quantity}
@@ -54,7 +54,7 @@ export default function ProductList({ product, itemNumber, removeButton }) {
       <div className="pd_value">
         <p
           data-testid={
-            `customer_checkout__element-order-table-unit-price-${itemNumber}`
+            `${userRole}_checkout__element-order-table-unit-price-${itemNumber}`
           }
         >
           { product.price.replace('.', ',') }
@@ -63,7 +63,7 @@ export default function ProductList({ product, itemNumber, removeButton }) {
       <div className="pd_subTotal">
         <p
           data-testid={
-            `customer_checkout__element-order-table-sub-total-${itemNumber}`
+            `${userRole}_checkout__element-order-table-sub-total-${itemNumber}`
           }
         >
           { subTotal.toFixed(2).replace('.', ',') }
@@ -101,4 +101,5 @@ ProductList.propTypes = {
   }).isRequired,
   itemNumber: PropTypes.number.isRequired,
   removeButton: PropTypes.bool.isRequired,
+  userRole: PropTypes.string.isRequired,
 };

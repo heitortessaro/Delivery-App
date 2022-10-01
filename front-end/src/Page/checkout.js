@@ -120,6 +120,7 @@ export default function Checkout() {
                       product={ product }
                       itemNumber={ index }
                       removeButton
+                      userRole="customer"
                     />
                   </div>
                 )) }

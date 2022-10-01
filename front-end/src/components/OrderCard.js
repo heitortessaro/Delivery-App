@@ -14,7 +14,7 @@ export default function OrderCard(
     <button
       type="button"
       className="order_card"
-      onClick={ () => navigate(`/customer/orders/${id}`) }
+      onClick={ () => navigate(`/${user}/orders/${id}`) }
     >
       <div className="order_number">
         <p>
