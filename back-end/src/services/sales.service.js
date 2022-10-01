@@ -28,11 +28,9 @@ class SalesService {
         const userSale = await this.salesModel.findByPk(id, { include: 
             [
              { model: product, as: 'products', through: { attributes: ['quantity'] } },
-             { model: user, as: 'seller'}
-            ] 
+             { model: user, as: 'seller' },
+            ], 
         });
-        console.log('a');
-        console.log(userSale);
         return userSale;
     }
 
@@ -43,8 +41,8 @@ class SalesService {
         const date = Date.now();
         await this.salesModel.create({ ...saleObj, saleDate: date, status: 'Pendente' });
         const { id } = await this.salesModel.findOne({ where: { ...saleObj, saleDate: date } });
-        products.map((p) => {
-            this.saleProductModel
+        products.map(async (p) => {
+            await this.saleProductModel
             .create({ saleId: id, productId: p.id, quantity: p.quantity });
         });
         return { id };
