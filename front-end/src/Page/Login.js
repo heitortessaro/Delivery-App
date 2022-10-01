@@ -5,6 +5,7 @@ import Logo from '../images/logo.jpg';
 import { login } from '../services/loginServices';
 import './styles/login.css';
 import { verifyLastUser } from '../services/userService';
+import { verifyLogin } from '../services/ordersService';
 
 const minpass = 6;
 const errovalidation = 404;
@@ -41,6 +42,27 @@ function Login() {
     };
     verifyButton();
   }, [email, password]);
+
+  const verifyUserLogged = async (user) => {
+    const statusLogged = 200;
+    const status = await verifyLogin(user);
+    if (status === statusLogged) {
+      if (user.role === 'customer') {
+        console.log('customer');
+        navigate('/customer/products');
+      } else {
+        console.log('seller');
+        navigate('/seller/orders');
+      }
+    } else {
+      localStorage.clear();
+    }
+  };
+
+  useEffect(() => {
+    const user = JSON.parse(window.localStorage.getItem('user')) || null;
+    if (user) verifyUserLogged(user);
+  }, []);
 
   const handleButtonLogin = async () => {
     const result = await login({ email, password });

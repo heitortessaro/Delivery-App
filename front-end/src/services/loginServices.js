@@ -1,9 +1,9 @@
-import axios from 'axios';
+const axios = require('axios');
 
 const URL_LOGIN = 'http://localhost:3001/login';
 const URL_USER = 'http://localhost:3001/user';
 
-export const login = async ({ email, password }) => {
+const login = async ({ email, password }) => {
   try {
     const result = await axios.post(URL_LOGIN, { email, password });
     return result.data;
@@ -12,9 +12,15 @@ export const login = async ({ email, password }) => {
   }
 };
 
-export const createUser = async ({ name, password, email }) => {
+const createUser = async ({ name, password, email, role }, token) => {
   try {
-    const { data } = await axios.post(URL_USER, { name, password, email });
+    const { data } = await axios.post(
+      URL_USER,
+      { name, password, email, role },
+      { headers: {
+        authorization: token,
+      } },
+    );
     console.log(data);
     return data;
   } catch (error) {
@@ -22,4 +28,4 @@ export const createUser = async ({ name, password, email }) => {
   }
 };
 
-export default { login, createUser };
+module.exports = { login, createUser };

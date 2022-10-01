@@ -3,13 +3,26 @@ import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './styles/navClient.css';
 
-export default function CustomerProducts({ selected, customer, showProducts }) {
+export default function CustomerProducts({ selected, customer, showProducts, manage }) {
   // const pedidos = showProducts ? 'Meus Pedidos' : 'Pedidos';
+  let infobutton = '';
   const navigate = useNavigate();
   const logoutFun = () => {
     localStorage.clear();
     navigate('/login');
   };
+  const navigatePedidos = () => {
+    // console.log(showProducts);
+    if (showProducts) {
+      navigate('/customer/orders');
+    } else { navigate('/seller/orders'); }
+  };
+
+  if (!manage) {
+    if (showProducts) {
+      infobutton = 'Meus Pedidos';
+    } else infobutton = 'Pedidos';
+  } else infobutton = 'Gerenciar Usuarios';
 
   return (
     <nav className="navbar_bg">
@@ -28,9 +41,9 @@ export default function CustomerProducts({ selected, customer, showProducts }) {
           className={ ` ${selected === 'pedidos' ? 'selected' : 'no_selected'}` }
           data-testid="customer_products__element-navbar-link-orders"
           type="button"
-          onClick={ () => navigate('/customer/checkout') }
+          onClick={ () => navigatePedidos() }
         >
-          {showProducts ? 'Meus Pedidos' : 'Pedidos'}
+          { infobutton }
         </button>
       </div>
       <div>
@@ -59,4 +72,5 @@ CustomerProducts.propTypes = {
   selected: PropTypes.string.isRequired,
   customer: PropTypes.string.isRequired,
   showProducts: PropTypes.bool.isRequired,
+  manage: PropTypes.bool.isRequired,
 };

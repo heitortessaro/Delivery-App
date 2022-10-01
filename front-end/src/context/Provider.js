@@ -6,7 +6,7 @@ import Context from './Context';
 function Provider({ children }) {
   const [checkoutTotalValue, setCheckoutTotalValue] = useState(0);
   const [sales, setsales] = useState([]);
-  const [checkout, setCheckout] = useState();
+  const [checkout, setCheckout] = useState([]);
   const [allSellers, setAllSellers] = useState();
 
   const state = useMemo(() => ({

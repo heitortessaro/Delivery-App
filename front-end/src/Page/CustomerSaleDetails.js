@@ -2,45 +2,41 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import NavClient from '../components/NavClient';
-import TotalTag from '../components/TotalTag';
 import SaleDetail from '../components/SaleDetails';
 import ProductList from '../components/ProductList';
 import './styles/customerProduct.css';
 
 const axios = require('axios');
 
-export default function UserSaleDetails({ userRole }) {
+export default function CustomerSaleDetails({ userRole }) {
   const user = JSON.parse(window.localStorage.getItem('user')) || {};
-  const [sale, setSale] = useState();
+  const [sale, setSale] = useState(false);
+  const [products, setProducts] = useState(false);
   const params = useParams();
 
-  /* const getSale = async () => {
-    const URL = `http://localhost:3001/sales/${params.id}`;
-    const { data } = await axios.get(URL);
-    console.log(data);
-    setSale(data);
-  }; */
-
-  useEffect(async () => {
+  useEffect(() => {
+    console.log(params.id);
     const URL = `http://localhost:3001/sales/${params.id}`;
     async function fetchData() {
       const { data } = await axios.get(URL);
-      console.log(data);
+      console.log(data.products);
+      if (data.products.length) {
+        setProducts(data.products);
+      }
       setSale(data);
-      return data;
     }
-    fetchData();
-  }, []);
+    if (!sale || !products) { fetchData(); }
+  }, [sale, products, params.id]);
   return (
     <div>
       <section>
         <NavClient selected="pedidos" customer={ user.name } showProducts />
       </section>
       <section>
-        {sale && (
+        {sale && products && (
           <section>
             <SaleDetail userRole={ userRole } sale={ sale } />
-            {sale.products.map((product, i) => (
+            {products.map((product, i) => (
               <ProductList
                 key={ `${product.name + product.id}` }
                 product={ product }
@@ -63,6 +59,6 @@ export default function UserSaleDetails({ userRole }) {
   );
 }
 
-UserSaleDetails.propTypes = {
+CustomerSaleDetails.propTypes = {
   userRole: PropTypes.string.isRequired,
 };

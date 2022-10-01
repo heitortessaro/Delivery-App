@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
-import { useNavigate, useParams } from 'react-router-dom';
+import { returnDate } from '../services/ordersService';
 
 export default function SaleDetail({ userRole, sale }) {
   return (
@@ -21,7 +21,7 @@ export default function SaleDetail({ userRole, sale }) {
         </span>
       )}
       <span data-testid="customer_order_details__element-order-details-label-order-date">
-        {sale.saleDate}
+        {returnDate(sale.saleDate)}
       </span>
       <span
         data-testid="customer_order_details__element-order-details-label-delivery-status"
@@ -32,6 +32,7 @@ export default function SaleDetail({ userRole, sale }) {
         <button
           type="submit"
           data-testid="customer_order_details__button-delivery-check"
+          disabled
         >
           {' '}
           MARCAR COMO ENTREGUE

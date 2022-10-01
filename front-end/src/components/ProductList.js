@@ -4,18 +4,22 @@ import './styles/ProductList.css';
 import Context from '../context/Context';
 
 export default function ProductList({ product, itemNumber, removeButton }) {
-  const subTotal = Number(product.price) * Number(product.quantity);
+  let quantity = 0;
+  if (product.sales_products) {
+    quantity = product.sales_products.quantity;
+  } else {
+    quantity = product.quantity;
+  }
+  const subTotal = Number(product.price) * Number(quantity);
+  console.log(subTotal);
   const { setCheckout } = useContext(Context);
   const productsCheckouts = JSON.parse(localStorage.getItem('checkoutProducts'));
 
   const RemoveProduct = () => {
-    const remove = productsCheckouts.find((produto) => produto.id === product.id);
-    localStorage.setItem(
-      'checkoutProducts',
-      JSON.stringify(productsCheckouts.filter((p) => p !== remove)),
-    );
-    const updateStorage = productsCheckouts.find((produto) => produto.id === product.id);
-    setCheckout(updateStorage);
+    // const remove = productsCheckouts.find((produto) => produto.id === product.id);
+    const temp = productsCheckouts.filter((p) => p.id !== product.id);
+    localStorage.setItem('checkoutProducts', JSON.stringify(temp));
+    setCheckout(temp);
   };
   return (
     <div className="box_pd_info">
