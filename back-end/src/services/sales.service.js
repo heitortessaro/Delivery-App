@@ -1,4 +1,4 @@
-const { sale, product, sales_products } = require('../database/models');
+const { sale, product, sales_products, user } = require('../database/models');
 const { CustomError } = require('../helpers/customError');
 
 class SalesService {
@@ -26,7 +26,11 @@ class SalesService {
 
     async getSaleById(id) {
         const userSale = await this.salesModel.findByPk(id, { include: 
-            { model: product, as: 'products', through: { attributes: ['quantity'] } } });
+            [
+             { model: product, as: 'products', through: { attributes: ['quantity'] } },
+             { model: user, as: 'seller' },
+            ], 
+        });
         return userSale;
     }
 
@@ -37,7 +41,7 @@ class SalesService {
         const date = Date.now();
         await this.salesModel.create({ ...saleObj, saleDate: date, status: 'Pendente' });
         const { id } = await this.salesModel.findOne({ where: { ...saleObj, saleDate: date } });
-        products.forEach(async (p) => {
+        products.map(async (p) => {
             await this.saleProductModel
             .create({ saleId: id, productId: p.id, quantity: p.quantity });
         });

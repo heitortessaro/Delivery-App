@@ -7,6 +7,7 @@ import CustomerProducts from './Page/CustomerProducts';
 import Checkout from './Page/checkout';
 import CustomerOrders from './Page/CustomerOrders';
 import SellerOrders from './Page/SellerOrders';
+import UserOrderDetails from './Page/UserOrderDetails';
 import AdminManage from './Page/AdminManage';
 
 function App() {
@@ -21,7 +22,16 @@ function App() {
           <Route exact path="/customer/products" element={ <CustomerProducts /> } />
           <Route exact path="/customer/orders" element={ <CustomerOrders /> } />
           <Route exact path="/seller/orders" element={ <SellerOrders /> } />
-          <Route exact path="/customer/orders/:id" element={ ' ' } />
+          <Route
+            exact
+            path="/customer/orders/:id"
+            element={ <UserOrderDetails userRole="customer" /> }
+          />
+          <Route
+            exact
+            path="/seller/orders/:id"
+            element={ <UserOrderDetails userRole="seller" /> }
+          />
           <Route exact path="/admin/manage" element={ <AdminManage /> } />
         </Switch>
       </div>
