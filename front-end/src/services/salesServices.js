@@ -7,7 +7,6 @@ export const postSale = async (order, user) => {
     const { data } = await axios.post(URL_SALES, order, { headers: {
       authorization: user.token,
     } });
-    console.log(data.id);
     return data.id;
   } catch (error) {
     return { error: error.response };
