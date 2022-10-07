@@ -85,14 +85,12 @@ export default function Checkout() {
 
   const submitButton = async () => {
     const total = computeTotalCart(productsCheckouts);
-    // setCheckoutTotalValue(total);
-    setTotalPrice(Number(total));
-    order.totalPrice = Number(total).toFixed(2);
+    setTotalPrice(Number((total)).toFixed(2));
+    order.totalPrice = totalPrice;
     setingOrder();
-    console.log(setInpustAdress);
-    const idRetunr = await postSale(order, userStorage);
+    const idReturn = await postSale(order, userStorage);
     localStorage.setItem('checkoutProducts', JSON.stringify([]));
-    navigate(`/customer/orders/${idRetunr}`);
+    navigate(`/customer/orders/${idReturn}`);
   };
 
   return (
